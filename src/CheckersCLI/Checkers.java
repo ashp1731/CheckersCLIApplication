@@ -23,7 +23,7 @@ public class Checkers {
 		// Diamond Mickle
 		//Hi girl how r you?
 		// Hungry
-
+//cfc
 
 	public void setupByUser() {}
 	public boolean isInProgress() {
