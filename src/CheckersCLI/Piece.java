@@ -29,6 +29,6 @@ public class Piece {
 	}
 
 	public void kingPiece() {
-
+		this.rank = "king";
 	}
 }
