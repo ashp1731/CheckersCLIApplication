@@ -29,22 +29,19 @@ public class MovePieceTest {
 		Piece pieceRed = new Piece("r", "pawn");
 		Piece pieceBlack = new Piece("b", "pawn");
 		Piece pieceEmpty = new Piece("", "");
-		Piece pieceKing = new Piece("", "king");
 		
-		int i, j;
-		for (i = 0; i < SIZE; i++) {
-
-			for (i = 1; i < SIZE; i += 2) {
-				squares[i][1].setPiece(pieceRed);
-				squares[i][5].setPiece(pieceBlack); 
-				squares[i][7].setPiece(pieceBlack);
+		
+		for(int i=0;i <8;i++){ 
+			squares [0][ i ].setPiece(pieceBlack); 
+			squares [2][ i ].setPiece(pieceBlack);
+			squares [6][ i++].setPiece(pieceRed);
+			} 
+		
+		for(int i=1;i <8;i++){ 
+			squares [1][ i ].setPiece(pieceBlack); 
+			squares [5][ i ].setPiece(pieceRed); 
+			squares [7][ i++].setPiece(pieceRed);
 			}
-			for (i = 0; i < SIZE; i += 2) {
-				squares[i][0].setPiece(pieceRed);
-				squares[i][2].setPiece(pieceRed);
-				squares[i][6].setPiece(pieceBlack);
-			}
-		}
 		
 		// Move Piece Logic
 		Piece initialPiece = new Piece();
@@ -52,13 +49,16 @@ public class MovePieceTest {
 		squares[move.getInitialXCoor()][move.getInitialYCoor()].setPiece(pieceEmpty);
 		squares[move.getEndingXCoor()][move.getEndingYCoor()].setPiece(initialPiece);
 		
+		// change "pawn" to "king"
 		if(squares[move.getEndingXCoor()][move.getEndingYCoor()].getPiece().getColor() == "r" && move.getEndingYCoor() == 7) {
-			
+			Piece pieceKingR = new Piece("r", "king");
+			squares[move.getEndingXCoor()][move.getEndingYCoor()].setPiece(pieceKingR);
 		}
 		else if(squares[move.getEndingXCoor()][move.getEndingYCoor()].getPiece().getColor() == "b") {
-			
+			Piece pieceKingB = new Piece("b", "king");
+			squares[move.getEndingXCoor()][move.getEndingYCoor()].setPiece(pieceKingB);		
 		}
-//		initialPiece.setColor(squares[move.getInitialXCoor()][move.getInitialYCoor()].getPiece().getColor());
+
 		
 	}
 
