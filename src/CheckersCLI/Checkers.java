@@ -1,11 +1,13 @@
 package CheckersCLI;
 
+import java.io.InputStream;
 import java.util.*;
 
 public class Checkers {
 
 	public static final int SIZE = 8;
     private char[][] board;
+    private char whosemovenow;
     
 	public static void main(String[] args) {
 		
@@ -13,6 +15,7 @@ public class Checkers {
 		checkersGame.setupByUser();
 		
 		while(checkersGame.isInProgress()) {
+			
 			checkersGame.currentPlayerTakeTurn();
 			checkersGame.displayBoard();
 		}
@@ -20,17 +23,27 @@ public class Checkers {
 		checkersGame.displayEndOfGameMessage();
 	}
 
-		// Diamond Mickle
-		//Hi girl how r you?
-		// Hungry
-//cfc
-
-	public void setupByUser() {}
-	public boolean isInProgress() {
-		return false;
+	public void setupByUser() {
 	}
-	public void currentPlayerTakeTurn() {}
 	
+	public  boolean isInProgress() {
+		if(whosemovenow=='r') {
+			System.out.println("There is no winner");
+			return true;
+		}
+			else {
+				return false;
+			}	
+		}
+		
+	
+	public void currentPlayerTakeTurn() {}
+
+	private Scanner Scanner(InputStream in) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	public void displayBoard() {
 		board = new char[SIZE][SIZE];
 		int i,j;
