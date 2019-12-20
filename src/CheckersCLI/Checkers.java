@@ -1,73 +1,98 @@
 package CheckersCLI;
 
-import java.util.*;
+import java.util.Scanner;
 
 public class Checkers {
+	//2b.adding one more private currentPlayer
+	private Player currentPlayer;
+	private Board gameBoard;
+	private Player playerOne;
+	private Player playerTwo;
+	private boolean isInProgress;
+	
+	public Board getGameBoard() {
+		return gameBoard;
+	}
 
-	public static final int SIZE = 8;
-	private char[][] board;
+	public void setGameBoard(Board gameBoard) {
+		this.gameBoard = gameBoard;
+	}
 
+	public Player getPlayerOne() {
+		return playerOne;
+	}
+
+	public void setPlayerOne(Player playerOne) {
+		this.playerOne = playerOne;
+	}
+
+	public Player getPlayerTwo() {
+		return playerTwo;
+	}
+
+	public void setPlayerTwo(Player playerTwo) {
+		this.playerTwo = playerTwo;
+	}
+	
+	
+	//1a.main method
 	public static void main(String[] args) {
-
+//1b.CheckersObject
 		Checkers checkersGame = new Checkers();
+		
+		//1c.Board Object
+		Board board=new Board();
+		//1d. set Checkers.board to the board object created 
+		checkersGame.setGameBoard(board);
+		//1e.Checkers.setUpByUser()method
 		checkersGame.setupByUser();
-		checkersGame.displayBoard();
 		while (checkersGame.isInProgress()) {
 			checkersGame.currentPlayerTakeTurn();
 			checkersGame.displayBoard();
 		}
-
 		checkersGame.displayEndOfGameMessage();
 	}
-
-	// Diamond Mickle
-	// Hi girl how r you?
-	// Hungry
-//cfc
-
+	//2.a Creating Scanner object
+ Scanner  Scanner =new Scanner(System.in);
 	public void setupByUser() {
+		System.out.println("Enter'Start'to begin the game");
+		 String input=Scanner.nextLine();
+		 input.toLowerCase();
+		 if (input.equals("start")){
+			 System.out.println("Please select the opponent'Human' or'Computer'."); 
+			 String opponent=Scanner.nextLine();
+			 opponent.toLowerCase();
+			 playerOne=new Human("r");
+			 if(opponent.equals("human")) {
+				 playerTwo=new Human("b");
+				 isInProgress=true; 
+			 }
+			 else if(opponent.equals("Computer")) {
+				 playerTwo=new Computer("b");
+				 isInProgress=true;
+			 }
+		 }
+		 if (isInProgress) {
+			 displayBoard();
+		 }
+		 
 		
 	}
 
 	public boolean isInProgress() {
-		return false;
+
+		return isInProgress;
+
 	}
 
 	public void currentPlayerTakeTurn() {
+		Move move=new Move();
 	}
 
 	public void displayBoard() {
-		
-	Board board = new Board();
-	System.out.println(board.toString());
-//		board = new char[SIZE][SIZE];
-//		int i, j;
-//		for (i = 0; i < SIZE; i++) {
-//
-//			for (i = 1; i < SIZE; i += 2) {
-//				board[i][1] = 'r';
-//				board[i][5] = 'b';
-//				board[i][7] = 'b';
-//			}
-//			for (i = 0; i < SIZE; i += 2) {
-//				board[i][0] = 'r';
-//				board[i][2] = 'r';
-//				board[i][6] = 'b';
-//			}
-//		}
-
-		// Print board
-//		System.out.println("  1 2 3 4 5 6 7 8 x");
-//		for (i = 0; i < SIZE; i++) {
-//			System.out.print((i + 1) + " ");
-//			for (j = 0; j < SIZE; j++) {
-//				System.out.print(board[j][i] + " ");
-//			}
-//			System.out.println();
-//		}
-//		System.out.println("y");
-
 	}
+
+	
 
 	public void displayEndOfGameMessage() {
 	}

@@ -5,6 +5,9 @@ public class Move {
 
 	private int initialXCoor, initialYCoor;
 	private int endingXCoor, endingYCoor;
+	public Move() {
+		
+	}
 
 	public int getInitialXCoor() {
 		return initialXCoor;

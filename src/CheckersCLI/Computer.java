@@ -1,11 +1,11 @@
 package CheckersCLI;
 
-public class Human extends Player {
-	public Human() {
+public class Computer extends Player {
+	public Computer() {
 		super();
 	}
 
-	public Human(String color) {
+	public Computer(String color) {
 		super(color);
 	}
 
@@ -19,5 +19,3 @@ public class Human extends Player {
 		 return null;
 	 }
 }
-
-
