@@ -5,7 +5,7 @@ package CheckersCLI;
 	public Board() {
 		squares=new int[8][8];
 	}
-	public String toString() {
-		return ;
-	}
+//	public String toString() {
+//		return ;
+//	}
 }
