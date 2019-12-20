@@ -65,7 +65,7 @@ public class Checkers {
 			 playerOne=new Human("r");
 			 if(opponent.equals("human")) {
 				 playerTwo=new Human("b");
-				 isInProgress=true;
+				 isInProgress=true; 
 			 }
 			 else if(opponent.equals("Computer")) {
 				 playerTwo=new Computer("b");
