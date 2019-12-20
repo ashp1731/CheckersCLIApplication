@@ -1,13 +1,21 @@
 package CheckersCLI;
 
 import java.util.*;
+import java.io.*;
 
 public class Checkers {
 
+	public static void main(String[] args) {
+		
 	public static final int SIZE = 8;
     private char[][] board;
+    private int redcheckers;
+    private int blackcheckers;
+    private char currentplayer;
     
-	public static void main(String[] args) {
+	
+		
+		
 		
 		Checkers checkersGame = new Checkers();
 		checkersGame.setupByUser();
@@ -20,10 +28,6 @@ public class Checkers {
 		checkersGame.displayEndOfGameMessage();
 	}
 
-		// Diamond Mickle
-		//Hi girl how r you?
-		// Hungry
-//cfc
 
 	public void setupByUser() {}
 	public boolean isInProgress() {
@@ -59,9 +63,23 @@ public class Checkers {
 		}
 		System.out.println("y");
 		
+		Scanner stdin = new Scanner(System.in);
+
+		if (currentplayer=='r')
+		    System.out.println("Current turn : Red");
+		else
+		    System.out.println("Current turn : Black");
+
+		
+		
+		
+		
+		
+		   }
+		  }
+		
 		
 		
 	}
-	public void displayEndOfGameMessage() {}
-
-}
+	
+	}
