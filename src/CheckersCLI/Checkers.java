@@ -1,84 +1,100 @@
 package CheckersCLI;
 
-import java.awt.Button;
-import java.awt.Label;
-import java.awt.event.ActionEvent;
-import java.io.InputStream;
-import java.util.*;
+import java.util.Scanner;
 
 public class Checkers {
-	Board gameBoard;
-	Player playerOne;
-	Player playerTwo;
-	Button newGameButton;
-	Button closeButton;
-	Label message;
-
-	public void setupByUser(ActionEvent evt) {
-		// response the user to click oe of these two button
-		Object src = evt.getSource();
-		if (src == newGameButton)
-			doNewGame();
-		else if (src == closeButton)
-			doclose();
+	//2b.adding one more private currentPlayer
+	private Player currentPlayer;
+	private Board gameBoard;
+	private Player playerOne;
+	private Player playerTwo;
+	private boolean isInProgress;
+	
+	public Board getGameBoard() {
+		return gameBoard;
 	}
 
-	// starting to new game.
-	void doNewGame() {
-		if (isInProgress() == true) {
-			message.setText("Finish the current game first!!");
-			return;
-
-		}
-		// MORE CONDITION ARE HERE TO WRITE
+	public void setGameBoard(Board gameBoard) {
+		this.gameBoard = gameBoard;
 	}
 
-	void doclose() {
-		if (isInProgress() == false) {
-			message.setText("Lets Start the game!!");
-			// choose player1 or player2
-			message.setText("Player1");
-			System.out.println("choose");
-			message.setText("Player2");
-			return;
-		}
-		// MORE CONDITION ARE HERE TO WRITE
+	public Player getPlayerOne() {
+		return playerOne;
 	}
 
-	public boolean isInProgress() {
-		if (r != 0 || b != 0) {
-			System.out.println("there is no winner");
-			return true;
-		} else {
-
-			return false;
-		}
+	public void setPlayerOne(Player playerOne) {
+		this.playerOne = playerOne;
 	}
 
-	public void currentPlayerTakeTurn() {
-
+	public Player getPlayerTwo() {
+		return playerTwo;
 	}
 
-	public void displayBoard() {
-
+	public void setPlayerTwo(Player playerTwo) {
+		this.playerTwo = playerTwo;
 	}
-
-	public void displayEndOfGameMessage() {
-	}
-
+	
+	
+	//1a.main method
 	public static void main(String[] args) {
-		Label message = new Label("", Label.CENTER);
-		Button newGameButton = new Button("New Game");
-
-		Button closeButton = new Button("Close");
+//1b.CheckersObject
 		Checkers checkersGame = new Checkers();
-		checkersGame.setupByUser(null);
-
+		
+		//1c.Board Object
+		Board board=new Board();
+		//1d. set Checkers.board to the board object created 
+		checkersGame.setGameBoard(board);
+		//1e.Checkers.setUpByUser()method
+		checkersGame.setupByUser();
 		while (checkersGame.isInProgress()) {
 			checkersGame.currentPlayerTakeTurn();
 			checkersGame.displayBoard();
 		}
 		checkersGame.displayEndOfGameMessage();
+	}
+	//2.a Creating Scanner object
+ Scanner  Scanner =new Scanner(System.in);
+	public void setupByUser() {
+		System.out.println("Enter'Start'to begin the game");
+		 String input=Scanner.nextLine();
+		 input.toLowerCase();
+		 if (input.equals("start")){
+			 System.out.println("Please select the opponent'Human' or'Computer'."); 
+			 String opponent=Scanner.nextLine();
+			 opponent.toLowerCase();
+			 playerOne=new Human("r");
+			 if(opponent.equals("human")) {
+				 playerTwo=new Human("b");
+				 isInProgress=true;
+			 }
+			 else if(opponent.equals("Computer")) {
+				 playerTwo=new Computer("b");
+				 isInProgress=true;
+			 }
+		 }
+		 if (isInProgress) {
+			 displayBoard();
+		 }
+		 
+		
+	}
+
+	public boolean isInProgress() {
+
+		return isInProgress;
+
+	}
+
+	public void currentPlayerTakeTurn() {
+		Move move=new Move();
+	}
+
+	public void displayBoard() {
+	}
+
+	
+
+	public void displayEndOfGameMessage() {
 	}
 
 }
