@@ -2,7 +2,7 @@ package CheckersCLI;
 
 import java.util.Arrays;
 
-class Board {
+public class Board {
 	
 	public static final int SIZE = 8;
 	
