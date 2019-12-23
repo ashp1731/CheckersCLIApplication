@@ -90,6 +90,26 @@ public class Checkers {
 	}
 
 	public void displayBoard() {
+		// Print board
+
+				System.out.println("\n		1	2	3	4	5	6	7	8	x");
+				System.out.println("=================================================================================");
+				System.out.println();
+				for (int i = 0; i < gameBoard.SIZE; i++) {
+					System.out.print("\t" + (i + 1) + "\t");
+					for (int j = 0; j < gameBoard.SIZE; j++) {
+
+						if (gameBoard.getSquares()[i][j].getPiece().getColor() == null) {
+							System.out.print("*" + "\t");
+						} else {
+							System.out.print(gameBoard.getSquares()[i][j].getPiece().getColor() + "\t");
+						}
+					}
+					System.out.println();
+					System.out.println();
+				}
+				System.out.println("=================================================================================");
+				System.out.println("\ty\n");
 	}
 
 	
