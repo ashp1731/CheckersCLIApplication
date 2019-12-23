@@ -2,10 +2,6 @@ package CheckersCLI;
 
 import java.util.Arrays;
 
-import Checkers.Move;
-import Checkers.Piece;
-import Checkers.Square;
-
 class Board {
 	
 	public static final int SIZE = 8;
@@ -23,9 +19,7 @@ class Board {
 	//move peice
 	//square array
 	//create emplty method with moviec
-	public String toString() {
-		return ;
-		
+
 		// Checks if a move is valid.
 	    public boolean isMoveLegal(int movefrom, int moveto) {
 
@@ -123,8 +117,8 @@ class Board {
 		Piece pieceKing = new Piece("", "king");
 		
 		Piece initialPiece = new Piece();
-		initialPiece = squares[move.getInitalXCoor()][move.getInitialYCoor()].getPiece();
-		squares[move.getInitalXCoor()][move.getInitialYCoor()].setPiece(pieceEmpty);
+		initialPiece = squares[move.getInitialXCoor()][move.getInitialYCoor()].getPiece();
+		squares[move.getInitialXCoor()][move.getInitialYCoor()].setPiece(pieceEmpty);
 		squares[move.getEndingXCoor()][move.getEndingYCoor()].setPiece(initialPiece);
 
 		Piece kingPiece;
@@ -164,4 +158,3 @@ class Board {
 	
 	
 
-}
