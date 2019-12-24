@@ -62,10 +62,10 @@ public class Board {
 //		
 //		// Code to initialize the Board
 
-	squares = new Square[SIZE][SIZE];
+	squares = new Square[8][8];
 
-	for (int i = 0; i < SIZE; i++) {
-		for (int j = 0; j < SIZE; j++) {
+	for (int i = 0; i < 8; i++) {
+		for (int j = 0; j < 8; j++) {
 			squares[i][j] = new Square();
 			squares[i][j].setPiece(new Piece());
 		}
