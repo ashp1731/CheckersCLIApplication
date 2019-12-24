@@ -92,7 +92,7 @@ public class Checkers {
 	public void displayBoard() {
 		// Print board
 
-				System.out.println("\n		1	2	3	4	5	6	7	8	x");
+				System.out.println("\n		1	2	3	4	5	6	7	8	");
 				System.out.println("=================================================================================");
 				System.out.println();
 				for (int i = 0; i < gameBoard.SIZE; i++) {
@@ -109,7 +109,6 @@ public class Checkers {
 					System.out.println();
 				}
 				System.out.println("=================================================================================");
-				System.out.println("\ty\n");
 	}
 
 	
