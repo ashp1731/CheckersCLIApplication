@@ -69,6 +69,7 @@ public class Board {
 			squares[i][j] = new Square();
 			squares[i][j].setPiece(new Piece());
 		}
+	}
 
 		squares[0][1].setPiece(new Piece("r", "pawn"));
 		squares[0][3].setPiece(new Piece("r", "pawn"));
@@ -96,6 +97,7 @@ public class Board {
 		squares[7][4].setPiece(new Piece("b", "pawn"));
 		squares[7][6].setPiece(new Piece("b", "pawn"));
 	}
+	
 
 	public Board(Square[] square) {
 		super();
