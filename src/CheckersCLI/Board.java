@@ -98,14 +98,36 @@ public class Board {
 		squares[7][4].setPiece(new Piece("b", "pawn"));
 		squares[7][6].setPiece(new Piece("b", "pawn"));
 	}
-	
 
-	public Board(Square[] square) {
-		super();
-		this.squares = squares;
-	}
+	private boolean canJump(String color, int r1, int c1, int r2, int c2, int r3, int c3) {
+		// check whether the player can legally jump from (r1,c1) to (r3,c3). It is
+		// assumed
+		// that the player has a piece at (r1,c1), that (r3,c3) is a position
+		// that is 2 rows and 2 columns distant from (r1,c1) and that
+		// (r2,c2) is the square between (r1,c1) and (r3,c3).
 
- 
+		if (r3 < 0 || r3 >= 8 || c3 < 0 || c3 >= 8)
+			return false; // (r3,c3) is off the board.
+
+		if (squares[r3][c3].getPiece().getColor() != null) {
+			return false; // (r3,c3) already contains a piece.
+		}
+
+		if (color == "r") {
+			if (squares[r1][c1].getPiece().getColor() == "r" && r3 < r1)
+				return false; // Regular red piece can only move up.
+			if (squares[r2][c2].getPiece().getColor() != "b" && squares[r2][c2].getPiece().getColor() != "B")
+				return false; // There is no black piece to jump.
+			return true; // jump is legal
+		} else {
+			if (squares[r1][c1].getPiece().getColor() == "b" && r3 < r1)
+				return false; // Regular red piece can only move up.
+			if (squares[r2][c2].getPiece().getColor() != "r" && squares[r2][c2].getPiece().getColor() != "R")
+				return false; // There is no black piece to jump.
+			return true; // jump is legal
+		}
+	} // end canJump()
+
 	public void movePiece(Move move) {
 		// Move Piece Logic
 		Piece pieceEmpty = new Piece();
