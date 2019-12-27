@@ -8,7 +8,6 @@ public class Board {
 
 	private Square[][] squares;
 	char[][] board;
-	char whosemove;
 
 	public Square[][] getSquares() {
 		return squares;
@@ -29,20 +28,16 @@ public class Board {
 		int yfrom = movefrom.getInitialYCoor();
 		int xto = moveto.getEndingXCoor();
 		int yto = moveto.getEndingYCoor();
-		
+		char whosemove = squares[xfrom][yfrom].getPiece().getColor;
 		
 		// Gets array indeces corresponding to the move, from parameters.
-		/*int xfrom = movefrom. / 10 - 1;
-		int yfrom = movefrom % 10 - 1;
-		int xto = moveto / 10 - 1;
-		int yto = moveto % 10 - 1;*/
-
+		
 		// Check if indeces in range, if not, return false.
 		if (xfrom < 0 || xfrom > 8 || yfrom < 0 || yfrom > 8 || xto < 0 || xto > 8 || yto < 0 || yto > 8)
 			return false;
 
 		// Check to see you are moving your piece to a blank square.
-		else if (board[xfrom ==  && board[xto][yto] == '_') {
+		else if ( squares[xto][yto].getPiece() != null ) {
 
 			// Checks case of simple move
 			if (Math.abs(xfrom - xto) == 1) {
