@@ -131,12 +131,18 @@ public class Checkers {
 		//if all the values are >=0 create a move object using values and return object
 		int xFinal;
 		int yFinal;
-		if(xInitial >=0 && yInitial >=0 && xFinal >=0 && yFinal >=0) {
+		Object Move;
+		if(xInitial >=0 && yInitial >=0 && xFinal >=0 && yFinal >=0) 
 			//create move object
-			Move move=new Move(xInitial,yInitial,xFinal,yFinal);
-			
+			 Move move = new Move(xInitial,yInitial,xFinal,yFinal);
+		if
+		(gameBoard.isMoveLegal(Move)==true) {
+			gameBoard.movePiece(Move);
 		}
-		return move;
+		else if (gameBoard.isMoveLegal(Move)==false){
+			System.out.println("Invalid Move!");
+		}
+		return Move;
 	}
 	public void displayBoard() {
 		// Print board
