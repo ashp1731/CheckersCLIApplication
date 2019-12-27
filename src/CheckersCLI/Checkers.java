@@ -117,7 +117,25 @@ public class Checkers {
 		int xInitial=input.nextInt()-1;
 		int yInitial=input.nextInt()-1;
 		String color=gameBoard.getSquares()[xInitial][yInitial].getPiece().getColor();
-		
+		//checking if currentplayer color is not equal than print message"Not Your Turn"
+		if(color!=currentPlayer.getColor()) {
+			System.out.println("Not Your Turn!");
+		}
+		//if validation is success print message"where do you want to move" and get values  in two 
+		//int variables sya xfinal...using Scanner method and subtracting 1 from all the values.
+		else {
+			System.out.println("Where do you want to move it to?");
+			int xFinal=input.nextInt()-1;
+			int yFinal=input.nextInt()-1;
+		}
+		//if all the values are >=0 create a move object using values and return object
+		int xFinal;
+		int yFinal;
+		if(xInitial >=0 && yInitial >=0 && xFinal >=0 && yFinal >=0) {
+			//create move object
+			Move move=new Move(xInitial,yInitial,xFinal,yFinal);
+			
+		}
 		return move;
 	}
 	public void displayBoard() {
