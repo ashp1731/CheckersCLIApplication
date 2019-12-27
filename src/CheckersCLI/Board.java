@@ -23,20 +23,26 @@ public class Board {
 	// create emplty method with moviec
 
 	// Checks if a move is valid.
-	public boolean isMoveLegal(int movefrom, int moveto) {
-
+	public boolean isMoveLegal(Move movefrom, Move moveto) {
+		
+		int xfrom = movefrom.getInitialXCoor();
+		int yfrom = movefrom.getInitialYCoor();
+		int xto = moveto.getEndingXCoor();
+		int yto = moveto.getEndingYCoor();
+		
+		
 		// Gets array indeces corresponding to the move, from parameters.
-		int xfrom = movefrom / 10 - 1;
+		/*int xfrom = movefrom. / 10 - 1;
 		int yfrom = movefrom % 10 - 1;
 		int xto = moveto / 10 - 1;
-		int yto = moveto % 10 - 1;
+		int yto = moveto % 10 - 1;*/
 
 		// Check if indeces in range, if not, return false.
-		if (xfrom < 0 || xfrom > 7 || yfrom < 0 || yfrom > 7 || xto < 0 || xto > 7 || yto < 0 || yto > 7)
+		if (xfrom < 0 || xfrom > 8 || yfrom < 0 || yfrom > 8 || xto < 0 || xto > 8 || yto < 0 || yto > 8)
 			return false;
 
 		// Check to see you are moving your piece to a blank square.
-		else if (board[xfrom][yfrom] == whosemove && board[xto][yto] == '_') {
+		else if (board[xfrom ==  && board[xto][yto] == '_') {
 
 			// Checks case of simple move
 			if (Math.abs(xfrom - xto) == 1) {
@@ -104,11 +110,7 @@ public class Board {
 		this.squares = squares;
 	}
 
-	public boolean isMoveLegal(Move move) {
-
-		return true;
-	}
-
+ 
 	public void movePiece(Move move) {
 		// Move Piece Logic
 		Piece pieceEmpty = new Piece();
