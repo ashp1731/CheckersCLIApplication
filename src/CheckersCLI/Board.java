@@ -23,21 +23,21 @@ public class Board {
 
 	// Checks if a move is valid.
 	public boolean isMoveLegal(Move movefrom, Move moveto) {
-		
+
 		int xfrom = movefrom.getInitialXCoor();
 		int yfrom = movefrom.getInitialYCoor();
 		int xto = moveto.getEndingXCoor();
 		int yto = moveto.getEndingYCoor();
 		char whosemove = squares[xfrom][yfrom].getPiece().getColor;
-		
+
 		// Gets array indeces corresponding to the move, from parameters.
-		
+
 		// Check if indeces in range, if not, return false.
 		if (xfrom < 0 || xfrom > 8 || yfrom < 0 || yfrom > 8 || xto < 0 || xto > 8 || yto < 0 || yto > 8)
 			return false;
 
 		// Check to see you are moving your piece to a blank square.
-		else if ( squares[xto][yto].getPiece() != null ) {
+		else if (squares[xto][yto].getPiece() != null) {
 
 			// Checks case of simple move
 			if (Math.abs(xfrom - xto) == 1) {
@@ -63,14 +63,14 @@ public class Board {
 //		
 //		// Code to initialize the Board
 
-	squares = new Square[8][8];
+		squares = new Square[8][8];
 
-	for (int i = 0; i < 8; i++) {
-		for (int j = 0; j < 8; j++) {
-			squares[i][j] = new Square();
-			squares[i][j].setPiece(new Piece());
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+				squares[i][j] = new Square();
+				squares[i][j].setPiece(new Piece());
+			}
 		}
-	}
 
 		squares[0][1].setPiece(new Piece("r", "pawn"));
 		squares[0][3].setPiece(new Piece("r", "pawn"));
@@ -135,8 +135,6 @@ public class Board {
 
 		Piece initialPiece = new Piece();
 		initialPiece = squares[move.getInitialXCoor()][move.getInitialYCoor()].getPiece();
-		squares[move.getInitialXCoor()][move.getInitialYCoor()].setPiece(pieceEmpty);
-		squares[move.getEndingXCoor()][move.getEndingYCoor()].setPiece(initialPiece);
 
 		Piece kingPiece;
 		if (squares[move.getEndingXCoor()][move.getEndingYCoor()].getPiece().getColor() == "r"
@@ -156,6 +154,28 @@ public class Board {
 		}
 
 		// Jump Logic
+		if (canJump(squares[move.getInitialXCoor()][move.getInitialYCoor()].getPiece().getColor(),
+				move.getInitialXCoor(), move.getInitialYCoor(), move.getInitialXCoor() + 1, move.getInitialYCoor() + 1,
+				move.getInitialXCoor() + 2, move.getInitialYCoor() + 2))
+			squares[move.getInitialXCoor() + 1][move.getInitialYCoor() + 1].setPiece(pieceEmpty);
+
+		if (canJump(squares[move.getInitialXCoor()][move.getInitialYCoor()].getPiece().getColor(),
+				move.getInitialXCoor(), move.getInitialYCoor(), move.getInitialXCoor() - 1, move.getInitialYCoor() - 1,
+				move.getInitialXCoor() - 2, move.getInitialYCoor() - 2))
+			squares[move.getInitialXCoor() - 1][move.getInitialYCoor() - 1].setPiece(pieceEmpty);
+
+		if (canJump(squares[move.getInitialXCoor()][move.getInitialYCoor()].getPiece().getColor(),
+				move.getInitialXCoor(), move.getInitialYCoor(), move.getInitialXCoor() - 1, move.getInitialYCoor() + 1,
+				move.getInitialXCoor() - 2, move.getInitialYCoor() + 2))
+			squares[move.getInitialXCoor() - 1][move.getInitialYCoor() + 1].setPiece(pieceEmpty);
+
+		if (canJump(squares[move.getInitialXCoor()][move.getInitialYCoor()].getPiece().getColor(),
+				move.getInitialXCoor(), move.getInitialYCoor(), move.getInitialXCoor() + 1, move.getInitialYCoor() - 1,
+				move.getInitialXCoor() + 2, move.getInitialYCoor() - 2))
+			squares[move.getInitialXCoor() + 1][move.getInitialYCoor() - 1].setPiece(pieceEmpty);
+
+		squares[move.getInitialXCoor()][move.getInitialYCoor()].setPiece(pieceEmpty);
+		squares[move.getEndingXCoor()][move.getEndingYCoor()].setPiece(initialPiece);
 
 	}
 
