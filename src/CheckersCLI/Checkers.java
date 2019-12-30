@@ -4,7 +4,7 @@ import java.io.InputStream;
 import java.util.Scanner;
 
 public class Checkers {
-	// 2b.adding one more private currentPlayer
+// 2b.adding one more private currentPlayer
 	private Player currentPlayer;
 	private Board gameBoard;
 	private Player playerOne;
@@ -102,9 +102,9 @@ public class Checkers {
 	}
 
 	public Move enterMove() {
-		
+		Move move = new Move();
 		if (currentPlayer instanceof Human) {
-			currentPlayer.makemove(gameBoard);
+			move=currentPlayer.makemove(gameBoard);
 		}
 		else {
 			if(currentPlayer==playerOne) {
@@ -132,13 +132,11 @@ public class Checkers {
 		}
 //if all the values are >=0 create a move object using values and return object
 		
-		Object move;
+		//Object move;
 		if(xInitial >=0 && yInitial >=0 && xFinal >=0 && yFinal >=0) 
 //create move object
+		{
 			 Move move = new Move(xInitial,yInitial,xFinal,yFinal);
-		if
-		(gameBoard.isMoveLegal(move)==true) {
-			gameBoard.movePiece(move);
 		}
 		else if (gameBoard.isMoveLegal(move)==false){
 			System.out.println("Invalid Move!");
