@@ -151,4 +151,9 @@ public class Board {
 
 	}
 
+	public boolean isMoveLegal(Object move) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }
