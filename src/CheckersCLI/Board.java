@@ -1,6 +1,10 @@
 package CheckersCLI;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+
+import Checkers.Move;
+import Checkers.ValidMoves;
 
 public class Board {
 
@@ -127,6 +131,28 @@ public class Board {
 			return true; // jump is legal
 		}
 	} // end canJump()
+	
+	private boolean canMove(String color, int r1, int c1, int r2, int c2) {
+		// determine whether the player can legally move from (r1,c1) to (r2,c2). It is
+		// assumed that (r1,r2) contains one of the player's pieces and
+		// that (r2,c2) is a neighboring square.
+
+		if (r2 < 0 || r2 >= 8 || c2 < 0 || c2 >= 8)
+			return false; // (r2,c2) is off the board.
+
+		if (squares[r2][c2].getPiece().getColor() != null)
+			return false; // (r2,c2) already contains a piece.
+
+		if (color == "r") {
+			if (squares[r1][c1].getPiece().getColor() == "r" && r2 < r1)
+				return false; // Regular red piece can only move down.
+			return true; // The move is legal.
+		} else {
+			if (squares[r1][c1].getPiece().getColor() == "b" && r2 > r1)
+				return false; // Regular black piece can only move up.
+			return true; // The move is legal.
+		}
+	} // end canMove()
 
 	public void movePiece(Move move) {
 		// Move Piece Logic
@@ -179,12 +205,48 @@ public class Board {
 
 	}
 
-	public Move[] getLegalMoves(Player player) {
-		// Return an array containing all the legal CheckersMoves
+	public ValidMoves getLegalMoves(String color) {
+		// Return an object of type ValidMoves containing all the legal CheckersMoves
 		// for the specfied player on the current board. If the player
 		// has no legal moves, null is returned.
-		return null;
+		ArrayList<Move> moves = new ArrayList<>();
+		ValidMoves validMoves = new ValidMoves();
+		// Check possible jumps
 
+		for (int row = 0; row < 8; row++) {
+			for (int col = 0; col < 8; col++) {
+				if (squares[row][col].getPiece().getColor() == color
+						|| squares[row][col].getPiece().getColor() == color.toUpperCase()) {
+					if (canJump(color, row, col, row + 1, col + 1, row + 2, col + 2))
+						moves.add(new Move(row, col, row + 2, col + 2));
+					if (canJump(color, row, col, row - 1, col + 1, row - 2, col + 2))
+						moves.add(new Move(row, col, row - 2, col + 2));
+					if (canJump(color, row, col, row + 1, col - 1, row + 2, col - 2))
+						moves.add(new Move(row, col, row + 2, col - 2));
+					if (canJump(color, row, col, row - 1, col - 1, row - 2, col - 2))
+						moves.add(new Move(row, col, row - 2, col - 2));
+				}
+			}
+		}
+		validMoves.setValidJumps(moves);
+		moves = new ArrayList<>();
+		for (int row = 0; row < 8; row++) {
+			for (int col = 0; col < 8; col++) {
+				if (squares[row][col].getPiece().getColor() == color
+						|| squares[row][col].getPiece().getColor() == color.toUpperCase()) {
+					if (canMove(color, row, col, row + 1, col + 1))
+						moves.add(new Move(row, col, row + 1, col + 1));
+					if (canMove(color, row, col, row - 1, col + 1))
+						moves.add(new Move(row, col, row - 1, col + 1));
+					if (canMove(color, row, col, row + 1, col - 1))
+						moves.add(new Move(row, col, row + 1, col - 1));
+					if (canMove(color, row, col, row - 1, col - 1))
+						moves.add(new Move(row, col, row - 1, col - 1));
+				}
+			}
+		}
+		validMoves.setValidMoves(moves);
+		return validMoves;
 	}
 
 	@Override
