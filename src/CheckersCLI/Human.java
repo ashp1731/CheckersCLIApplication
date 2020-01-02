@@ -1,5 +1,9 @@
 package CheckersCLI;
 
+import java.util.Scanner;
+
+import Checkers.Move;
+
 public class Human extends Player {
 	public Human() {
 		super();
@@ -16,7 +20,38 @@ public class Human extends Player {
 		return(true);
 }
 	 public Move makemove(Board board) {
-		 return null;
+//		 Move move = new Move();
+//			if (this.getColor() == "r") {
+//				System.out.println("Current Player : " + "Player One 'r'");
+//			} else {
+//				System.out.println("Current Player : " + "Player Two 'b'");
+//			}
+//
+//			System.out.println();
+//			System.out.println("Which place do you want to move ? : ");
+//			Scanner input = new Scanner(System.in);
+//			int xInitial = input.nextInt() - 1;
+//			int yInitial = input.nextInt() - 1;
+//
+//			String color = board.getSquares()[xInitial][yInitial].getPiece().getColor();
+//			if (this.getColor() != color) {
+//				System.out.println("Not your turn!");
+//				System.out.println("Which place do you want to move ? : ");
+//				xInitial = input.nextInt() - 1;
+//				yInitial = input.nextInt() - 1;
+//			}
+//
+//			System.out.println("Where do you want to move it to ? : ");
+//			int xFinal = input.nextInt() - 1;
+//			int yFinal = input.nextInt() - 1;
+//
+//			// Create Move Object
+//			if (xInitial >= 0 && yInitial >= 0 && xFinal >= 0 && yFinal >= 0) {
+//				move = new Move(xInitial, yInitial, xFinal, yFinal);
+//			} else {
+//				System.out.println("Invalid move!");
+//			}
+//			return move;
 	 }
 }
 
