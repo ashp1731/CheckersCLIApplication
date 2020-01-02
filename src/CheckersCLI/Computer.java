@@ -1,5 +1,8 @@
 package CheckersCLI;
 
+import Checkers.Move;
+import Checkers.ValidMoves;
+
 public class Computer extends Player {
 	public Computer() {
 		super();
@@ -16,6 +19,16 @@ public class Computer extends Player {
 		return(true);
 }
 	 public Move makemove(Board board) {
-		 return null;
+			ValidMoves validMoves = board.getLegalMoves(this.getColor());
+			Move move = new Move();
+			
+			// Logic to randomly select Move/Jump
+			if(validMoves.getValidJumps().isEmpty()) {
+				if(!validMoves.getValidMoves().isEmpty()) {
+					
+				}
+			}		
+					
+			return move;
 	 }
 }
