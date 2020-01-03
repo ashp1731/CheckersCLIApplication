@@ -12,10 +12,6 @@ public class Checkers {
 	private boolean isInProgress;
 	Scanner Scanner = new Scanner(System.in);
 	java.util.Scanner input;
-
-	int xFinal;
-	int yFinal;
-
 	public Board getGameBoard() {
 		return gameBoard;
 	}
@@ -64,6 +60,7 @@ public class Checkers {
 			String opponent = Scanner.nextLine();
 			opponent.toLowerCase();
 			playerOne = new Human("r");
+			currentPlayer=playerOne;
 			if (opponent.equals("human")) {
 				playerTwo = new Human("b");
 				isInProgress = true;
@@ -85,8 +82,11 @@ public class Checkers {
 	}
 
 	public void currentPlayerTakeTurn() {
-		
-		Move move=currentPlayer.makemove(gameBoard);
+		Move moves=new Move();
+		 moves=currentPlayer.makemove(gameBoard);
+		if(gameBoard.isMoveLegal(moves, moves)) {
+			gameBoard.movePiece(moves);
+		}
 
 		if (currentPlayer.getColor() == playerOne.getColor()) {
 			currentPlayer = playerTwo;
