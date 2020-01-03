@@ -10,7 +10,7 @@ public class Checkers {
 	private Player playerOne;
 	private Player playerTwo;
 	private boolean isInProgress;
-	Scanner Scanner = new Scanner(System.in);
+	Scanner scanner = new Scanner(System.in);
 	java.util.Scanner input;
 
 	int xFinal;
@@ -57,15 +57,15 @@ public class Checkers {
 
 	public void setupByUser() {
 		System.out.println("Enter'Start'to begin the game");
-		String input = Scanner.nextLine();
+		String input = scanner.nextLine();
 		input.toLowerCase();
 		if (input.equals("start")) {
 			System.out.println("Please select the opponent'Human' or'Computer'.");
-			String opponent = Scanner.nextLine();
+			String opponent = scanner.nextLine();
 			opponent.toLowerCase();
-			playerOne = new Human("r");
+			playerOne = new Human("r", scanner);
 			if (opponent.equals("human")) {
-				playerTwo = new Human("b");
+				playerTwo = new Human("b", scanner);
 				isInProgress = true;
 			} else if (opponent.equals("Computer")) {
 				playerTwo = new Computer("b");
