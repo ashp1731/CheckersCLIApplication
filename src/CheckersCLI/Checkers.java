@@ -10,7 +10,7 @@ public class Checkers {
 	private Player playerOne;
 	private Player playerTwo;
 	private boolean isInProgress;
-	Scanner Scanner = new Scanner(System.in);
+	Scanner scanner = new Scanner(System.in);
 	java.util.Scanner input;
 	public Board getGameBoard() {
 		return gameBoard;
@@ -53,16 +53,16 @@ public class Checkers {
 
 	public void setupByUser() {
 		System.out.println("Enter'Start'to begin the game");
-		String input = Scanner.nextLine();
+		String input = scanner.nextLine();
 		input.toLowerCase();
 		if (input.equals("start")) {
 			System.out.println("Please select the opponent'Human' or'Computer'.");
-			String opponent = Scanner.nextLine();
+			String opponent = scanner.nextLine();
 			opponent.toLowerCase();
-			playerOne = new Human("r");
+			playerOne = new Human("r", scanner);
 			currentPlayer=playerOne;
 			if (opponent.equals("human")) {
-				playerTwo = new Human("b");
+				playerTwo = new Human("b", scanner);
 				isInProgress = true;
 			} else if (opponent.equals("Computer")) {
 				playerTwo = new Computer("b");
@@ -84,9 +84,9 @@ public class Checkers {
 	public void currentPlayerTakeTurn() {
 		Move moves=new Move();
 		 moves=currentPlayer.makemove(gameBoard);
-		if(gameBoard.isMoveLegal(moves, moves)) {
-			gameBoard.movePiece(moves);
-		}
+//		if(gameBoard.isMoveLegal(moves, moves)) {
+//			gameBoard.movePiece(moves);
+//		}
 
 		if (currentPlayer.getColor() == playerOne.getColor()) {
 			currentPlayer = playerTwo;
@@ -153,14 +153,15 @@ public class Checkers {
 
 		{
 			Move = new Move(xInitial, yInitial, xFinal, yFinal);
+		
 		}
 		
-		
+		//Board Board = new Board();
 		//I am confuse from the line
 		//pass above created Move object to Board
-//	if(Board.isMoveLegal(Move, Move)==true) {
-//		Board.movePiece(Move);
-//	}
+		if(gameBoard.isMoveLegal(Move, Move)==true) {
+		gameBoard.movePiece(Move);
+	}
 	else {
 		System.out.println("Invalid Move!");
 		currentPlayer.makemove(gameBoard);

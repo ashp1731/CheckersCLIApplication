@@ -1,7 +1,6 @@
 package CheckersCLI;
 
-import Checkers.Move;
-import Checkers.ValidMoves;
+
 
 public class Computer extends Player {
 	public Computer() {
