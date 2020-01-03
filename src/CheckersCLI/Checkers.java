@@ -158,9 +158,9 @@ public class Checkers {
 		
 		//I am confuse from the line
 		//pass above created Move object to Board
-	if(Board.isMoveLegal(Move, Move)==true) {
-		Board.movePiece(Move);
-	}
+//	if(Board.isMoveLegal(Move, Move)==true) {
+//		Board.movePiece(Move);
+//	}
 	else {
 		System.out.println("Invalid Move!");
 		currentPlayer.makemove(gameBoard);
