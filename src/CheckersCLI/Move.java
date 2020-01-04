@@ -47,5 +47,4 @@ public class Move {
 		this.endingXCoor = endingXCoor;
 		this.endingYCoor = endingYCoor;
 	}
-
 }

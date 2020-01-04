@@ -1,7 +1,7 @@
 package CheckersCLI;
 
-import java.io.InputStream;
-import java.util.Scanner;
+//import java.io.InputStream;
+
 import java.util.*;
 
 public class Checkers {
@@ -64,6 +64,7 @@ public class Checkers {
 			String opponent = scanner.nextLine();
 			opponent.toLowerCase();
 			playerOne = new Human("r", scanner);
+			currentPlayer = playerOne;
 			if (opponent.equals("human")) {
 				playerTwo = new Human("b", scanner);
 				isInProgress = true;
@@ -86,7 +87,8 @@ public class Checkers {
 
 	public void currentPlayerTakeTurn() {
 		
-		Move move=currentPlayer.makemove(gameBoard);
+		Move move = new Move();
+		move=currentPlayer.makemove(gameBoard);
 
 		if (currentPlayer.getColor() == playerOne.getColor()) {
 			currentPlayer = playerTwo;
@@ -101,9 +103,9 @@ public class Checkers {
 		System.out.println("\n		1	2	3	4	5	6	7	8	x");
 		System.out.println("=================================================================================");
 		System.out.println();
-		for (int i = 0; i < gameBoard.SIZE; i++) {
+		for (int i = 0; i < Board.SIZE; i++) {
 			System.out.print("\t" + (i + 1) + "\t");
-			for (int j = 0; j < gameBoard.SIZE; j++) {
+			for (int j = 0; j < Board.SIZE; j++) {
 
 				if (gameBoard.getSquares()[i][j].getPiece().getColor() == null) {
 					System.out.print("*" + "\t");
@@ -173,10 +175,7 @@ public class Checkers {
 	public static void main(String[] args) {
 
 		Checkers checkersGame = new Checkers();
-
-		Board Board = new Board();
-
-		checkersGame.setGameBoard(Board);
+		checkersGame.setGameBoard(new Board());
 
 		checkersGame.setupByUser();
 		while (checkersGame.isInProgress()) {
