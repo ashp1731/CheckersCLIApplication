@@ -84,17 +84,28 @@ public class Checkers {
 	public void currentPlayerTakeTurn() {
 		Move moves=new Move();
 		 moves=currentPlayer.makemove(gameBoard);
-//		if(gameBoard.isMoveLegal(moves, moves)) {
-//			gameBoard.movePiece(moves);
-//		}
-
+		 boolean isMovevalid=false; 
+		 do {
+			 moves=currentPlayer.makemove(gameBoard);
+			if (gameBoard.isMoveLegal(moves,currentPlayer.getColor())){
+				gameBoard.movePiece(moves);
+				isMovevalid=false;
+			} 
+			else {
+				  isMovevalid=true;
+			 }
+		 }while(isMovevalid);
+		 
+	
 		if (currentPlayer.getColor() == playerOne.getColor()) {
 			currentPlayer = playerTwo;
 		} else {
 			currentPlayer = playerOne;
 		}
 
+
 	}
+	
 
 	public void displayBoard() {
 
@@ -156,10 +167,7 @@ public class Checkers {
 		
 		}
 		
-		//Board Board = new Board();
-		//I am confuse from the line
-		//pass above created Move object to Board
-		if(gameBoard.isMoveLegal(Move, Move)==true) {
+		if(gameBoard.isMoveLegal(Move,currentPlayer.getColor())) {
 		gameBoard.movePiece(Move);
 	}
 	else {

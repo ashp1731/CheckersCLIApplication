@@ -24,41 +24,43 @@ public class Board {
 	// create emplty method with moviec
 
 	// Checks if a move is valid.
-	public boolean isMoveLegal(Move movefrom, Move moveto) {
+	public boolean isMoveLegal(Move move,String color) {
 		
-		int xfrom = movefrom.getInitialXCoor();
-		int yfrom = movefrom.getInitialYCoor();
-		int xto = moveto.getEndingXCoor();
-		int yto = moveto.getEndingYCoor();
-		String whosemove = squares[xfrom][yfrom].getPiece().getColor(); // changed to type String by Ashwini
-		
-		// Gets array indeces corresponding to the move, from parameters.
-		
-		// Check if indeces in range, if not, return false.
-		if (xfrom < 0 || xfrom > 8 || yfrom < 0 || yfrom > 8 || xto < 0 || xto > 8 || yto < 0 || yto > 8)
-			return false;
-
-		// Check to see you are moving your piece to a blank square.
-		else if ( squares[xto][yto].getPiece() != null ) {
-
-			// Checks case of simple move
-			if (Math.abs(xfrom - xto) == 1) {
-				if ((whosemove == "r") && (yto - yfrom == 1))
-					return true;
-				else if ((whosemove == "b") && (yto - yfrom == -1))
-					return true;
-			}
-
-			// Checks case of a jump
-			else if (Math.abs(xfrom - xto) == 2) {
-				if (whosemove == "r" && (yto - yfrom == 2) && board[(xfrom + xto) / 2][(yfrom + yto) / 2] == 'b')
-					return true;
-				else if (whosemove == "b" && (yto - yfrom == -2) && board[(xfrom + xto) / 2][(yfrom + yto) / 2] == 'r')
-					return true;
-			}
-		}
-		// If move is neither a simple one or a jump, it is not legal.
-		return false;
+//		int xfrom = movefrom.getInitialXCoor();
+//		int yfrom = movefrom.getInitialYCoor();
+//		int xto = moveto.getEndingXCoor();
+//		int yto = moveto.getEndingYCoor();
+//		String whosemove = squares[xfrom][yfrom].getPiece().getColor(); // changed to type String by Ashwini
+//		
+//		// Gets array indeces corresponding to the move, from parameters.
+//		
+//		// Check if indeces in range, if not, return false.
+//		if (xfrom < 0 || xfrom > 8 || yfrom < 0 || yfrom > 8 || xto < 0 || xto > 8 || yto < 0 || yto > 8)
+//			return false;
+//
+//		// Check to see you are moving your piece to a blank square.
+//		else if ( squares[xto][yto].getPiece() != null ) {
+//
+//			// Checks case of simple move
+//			if (Math.abs(xfrom - xto) == 1) {
+//				if ((whosemove == "r") && (yto - yfrom == 1))
+//					return true;
+//				else if ((whosemove == "b") && (yto - yfrom == -1))
+//					return true;
+//			}
+//
+//			// Checks case of a jump
+//			else if (Math.abs(xfrom - xto) == 2) {
+//				if (whosemove == "r" && (yto - yfrom == 2) && board[(xfrom + xto) / 2][(yfrom + yto) / 2] == 'b')
+//					return true;
+//				else if (whosemove == "b" && (yto - yfrom == -2) && board[(xfrom + xto) / 2][(yfrom + yto) / 2] == 'r')
+//					return true;
+//			}
+//		}
+//		// If move is neither a simple one or a jump, it is not legal.
+//		return false;
+		ValidMoves ValidMoves= getLegalMoves(color);
+		return ValidMoves.getValidJumps().contains(move)||(ValidMoves.getValidJumps().size()==0 &&ValidMoves.getValidMoves().contains(move));
 	}
 
 	public Board() {
