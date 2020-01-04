@@ -12,10 +12,6 @@ public class Checkers {
 	private boolean isInProgress;
 	Scanner scanner = new Scanner(System.in);
 	java.util.Scanner input;
-
-	int xFinal;
-	int yFinal;
-
 	public Board getGameBoard() {
 		return gameBoard;
 	}
@@ -64,7 +60,9 @@ public class Checkers {
 			String opponent = scanner.nextLine();
 			opponent.toLowerCase();
 			playerOne = new Human("r", scanner);
+
 			currentPlayer = playerOne;
+
 			if (opponent.equals("human")) {
 				playerTwo = new Human("b", scanner);
 				isInProgress = true;
@@ -86,9 +84,21 @@ public class Checkers {
 	}
 
 	public void currentPlayerTakeTurn() {
-		
-		Move move = new Move();
-		move=currentPlayer.makemove(gameBoard);
+
+		Move moves=new Move();
+		 boolean isMovevalid=false; 
+		 do {
+			 moves=currentPlayer.makemove(gameBoard);
+			if (gameBoard.isMoveLegal(moves,currentPlayer.getColor())){
+				gameBoard.movePiece(moves);
+				isMovevalid=false;
+			} 
+			else {
+				  isMovevalid=true;
+			 }
+		 }while(isMovevalid);
+		 
+	
 
 		if (currentPlayer.getColor() == playerOne.getColor()) {
 			currentPlayer = playerTwo;
@@ -96,7 +106,9 @@ public class Checkers {
 			currentPlayer = playerOne;
 		}
 
+
 	}
+	
 
 	public void displayBoard() {
 
@@ -126,51 +138,49 @@ public class Checkers {
 		}
 	}
 
-	public Move enterMove() {
-		Move Move = new Move();
-		if (currentPlayer instanceof Human) {
-			System.out.println("The current Player is:Human and color 'r'");
-
-		}
-
-		System.out.println("Which place do you want to move?:");
-
-		int xInitial = input.nextInt() - 1;
-		int yInitial = input.nextInt() - 1;
-		if (currentPlayer.getColor() == "r" && xInitial == 'b') {
-			System.out.println("Not Your Turn!");
-		}
-		String color = gameBoard.getSquares()[xInitial][yInitial].getPiece().getColor();
-		if (color == currentPlayer.getColor()) {
-			System.out.println("Your Turn");
-		} else if (currentPlayer.getColor() != color) {
-			System.out.println("Not Your Turn");
-		}
-
-		System.out.println("Where do you want to move it to?:");
-		int xFinal = input.nextInt() - 1;
-		int yFinal = input.nextInt() - 1;
-
-		if (xInitial >= 0 && yInitial >= 0 && xFinal >= 0 && yFinal >= 0)
-
-		{
-			Move = new Move(xInitial, yInitial, xFinal, yFinal);
-		}
-		
-		
-		//I am confuse from the line
-		//pass above created Move object to Board
-//	if(Board.isMoveLegal(Move, Move)==true) {
-//		Board.movePiece(Move);
+//	public Move enterMove() {
+//		Move Move = new Move();
+//		if (currentPlayer instanceof Human) {
+//			System.out.println("The current Player is:Human and color 'r'");
+//
+//		}
+//
+//		System.out.println("Which place do you want to move?:");
+//
+//		int xInitial = input.nextInt() - 1;
+//		int yInitial = input.nextInt() - 1;
+//		if (currentPlayer.getColor() == "r" && xInitial == 'b') {
+//			System.out.println("Not Your Turn!");
+//		}
+//		String color = gameBoard.getSquares()[xInitial][yInitial].getPiece().getColor();
+//		if (color == currentPlayer.getColor()) {
+//			System.out.println("Your Turn");
+//		} else if (currentPlayer.getColor() != color) {
+//			System.out.println("Not Your Turn");
+//		}
+//
+//		System.out.println("Where do you want to move it to?:");
+//		int xFinal = input.nextInt() - 1;
+//		int yFinal = input.nextInt() - 1;
+//
+//		if (xInitial >= 0 && yInitial >= 0 && xFinal >= 0 && yFinal >= 0)
+//
+//		{
+//			Move = new Move(xInitial, yInitial, xFinal, yFinal);
+//		
+//		}
+//		
+//		if(gameBoard.isMoveLegal(Move,currentPlayer.getColor())) {
+//		gameBoard.movePiece(Move);
 //	}
-	else {
-		System.out.println("Invalid Move!");
-		currentPlayer.makemove(gameBoard);
-	}
-		
-
-		return Move;
-	}
+//	else {
+//		System.out.println("Invalid Move!");
+//		currentPlayer.makemove(gameBoard);
+//	}
+//		
+//
+//		return Move;
+//	}
 
 	public static void main(String[] args) {
 

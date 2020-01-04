@@ -4,6 +4,7 @@ public class Piece {
 
 	private String color; // red or black
 	private String rank; // pawn or king
+	public char getColor;
 
 	public String getColor() {
 		return color;
