@@ -194,6 +194,7 @@ public class Board {
 		}
 	} // end canJump()
 
+//
 	private boolean canMove(String color, int r1, int c1, int r2, int c2) {
 		// determine whether the player can legally move from (r1,c1) to (r2,c2). It is
 		// assumed that (r1,r2) contains one of the player's pieces and
@@ -204,6 +205,9 @@ public class Board {
 
 		if (squares[r2][c2].getPiece().getColor() != null)
 			return false; // (r2,c2) already contains a piece.
+		
+		if (color == "R" || color == "B")
+			return true; 
 
 		if (color == "r") {
 			if (squares[r1][c1].getPiece().getColor() == "r" && r2 < r1)
@@ -213,6 +217,11 @@ public class Board {
 			if (squares[r1][c1].getPiece().getColor() == "b" && r2 > r1)
 				return false; // Regular black piece can only move up.
 			return true; // The move is legal.
+			
+			
+			
+			
+			
 		}
 	} // end canMove()
 	
@@ -249,7 +258,7 @@ public class Board {
 					if (canMove(color, row, col, row + 1, col + 1))
 						moves.add(new Move(row, col, row + 1, col + 1));
 					if (canMove(color, row, col, row - 1, col + 1))
-						moves.add(new Move(row, col, row - 1, col + 1));
+						moves.add(new Move(row, col, row -0 1, col + 1));
 					if (canMove(color, row, col, row + 1, col - 1))
 						moves.add(new Move(row, col, row + 1, col - 1));
 					if (canMove(color, row, col, row - 1, col - 1))
