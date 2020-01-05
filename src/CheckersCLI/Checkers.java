@@ -52,23 +52,33 @@ public class Checkers {
 	}
 
 	public void setupByUser() {
-		System.out.println("Enter'Start'to begin the game");
+		System.out.println("Enter 'Start' to begin the game");
 		String input = scanner.nextLine();
-		input.toLowerCase();
+		input = input.toLowerCase();
 		if (input.equals("start")) {
 			System.out.println("Please select the opponent'Human' or'Computer'.");
-			String opponent = scanner.nextLine();
-			opponent.toLowerCase();
-			playerOne = new Human("r", scanner);
-
-			currentPlayer = playerOne;
-
-			if (opponent.equals("human")) {
-				playerTwo = new Human("b", scanner);
-				isInProgress = true;
-			} else if (opponent.equals("Computer")) {
-				playerTwo = new Computer("b");
-				isInProgress = true;
+			
+			boolean opponentSelected = false;
+			while(!opponentSelected) {
+				String opponent = scanner.nextLine();
+				opponent.toLowerCase();
+				
+				playerOne = new Human("r", scanner);
+				currentPlayer = playerOne;
+				
+				if (opponent.equals("human")) {
+					playerTwo = new Human("b", scanner);
+					opponentSelected = true;
+					isInProgress = true;
+				} else if (opponent.equals("Computer")) {
+					playerTwo = new Computer("b");
+					opponentSelected = true;
+					isInProgress = true;
+				} else {
+					System.out.println("Please select the opponent'Human' or'Computer'.");
+					opponent = scanner.nextLine();
+					isInProgress = true;
+				}
 			}
 		}
 		if (isInProgress=true) {

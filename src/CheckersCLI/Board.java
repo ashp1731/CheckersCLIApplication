@@ -113,7 +113,6 @@ public class Board {
 	public void movePiece(Move move) {
 		// Move Piece Logic
 		Piece pieceEmpty = new Piece();
-		Piece pieceKing = new Piece("", "king");
 
 		Piece initialPiece = new Piece();
 		initialPiece = squares[move.getInitialXCoor()][move.getInitialYCoor()].getPiece();
@@ -122,7 +121,7 @@ public class Board {
 
 		Piece kingPiece;
 		if (squares[move.getInitialXCoor()][move.getInitialYCoor()].getPiece().getColor() == "r"
-				&& move.getEndingYCoor() == 7) {
+				&& move.getEndingXCoor() == 7) {
 
 			kingPiece = squares[move.getInitialXCoor()][move.getInitialYCoor()].getPiece();
 			kingPiece.setRank("king");
@@ -130,7 +129,7 @@ public class Board {
 			squares[move.getEndingXCoor()][move.getEndingYCoor()].setPiece(kingPiece);
 
 		} else if (squares[move.getInitialXCoor()][move.getInitialYCoor()].getPiece().getColor() == "b"
-				&& move.getEndingYCoor() == 0) {
+				&& move.getEndingXCoor() == 0) {
 
 			kingPiece = squares[move.getInitialXCoor()][move.getInitialYCoor()].getPiece();
 			kingPiece.setRank("king");
