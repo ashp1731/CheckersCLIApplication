@@ -72,7 +72,7 @@ public class Checkers {
 						playerTwo = new Human("b", scanner);
 						opponentSelected = true;
 						isInProgress = true;
-					} else if (opponent.equals("Computer")) {
+					} else if (opponent.equals("computer")) {
 						playerTwo = new Computer("b");
 						opponentSelected = true;
 						isInProgress = true;

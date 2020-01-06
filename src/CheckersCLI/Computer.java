@@ -21,6 +21,7 @@ public class Computer extends Player {
 			ValidMoves validMoves = board.getLegalMoves(this.getColor());
 			Move move = new Move();
 			int arraySize;
+			System.out.println("Current Player : " + "Player Two 'b'");
 			if(validMoves.getValidJumps().size()>0){
 				arraySize = validMoves.getValidJumps().size();
 				int rand=(int)(Math.random()*arraySize);
