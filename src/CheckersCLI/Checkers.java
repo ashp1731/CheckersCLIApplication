@@ -72,7 +72,7 @@ public class Checkers {
 						playerTwo = new Human("b", scanner);
 						opponentSelected = true;
 						isInProgress = true;
-					} else if (opponent.equals("Computer")) {
+					} else if (opponent.equals("computer")) {
 						playerTwo = new Computer("b");
 						opponentSelected = true;
 						isInProgress = true;
@@ -116,6 +116,10 @@ public class Checkers {
 			if (gameBoard.isMoveLegal(moves,currentPlayer.getColor())){
 				gameBoard.movePiece(moves);
 				
+				Move printMove = new Move();
+				printMove.setInitialXCoor(moves.getInitialXCoor() +1 );
+				printMove.setInitialYCoor(moves.getInitialYCoor() +1 );
+				
 				boolean jumpContinue = false;
 				if (moves.isJumpMove()) {
 					Move moveJump = createNextMoveForSamePiece(moves);
@@ -133,9 +137,21 @@ public class Checkers {
 							gameBoard.movePiece(calcMoveJump);
 						}
 					} while (jumpContinue);
+
+					printMove.setEndingXCoor(moveJump.getEndingXCoor() +1 );
+					printMove.setEndingYCoor(moveJump.getEndingYCoor() +1 );
+					printMove(printMove);
+				}
+				else {
+					printMove.setEndingXCoor(moves.getEndingXCoor() +1 );
+					printMove.setEndingYCoor(moves.getEndingYCoor() +1 );
 				}
 				
 				isMovevalid=false;
+				
+				 if(currentPlayer instanceof Computer) {
+					 printMove(printMove);
+				 }
 			} 
 			else {
 				System.out.println("This move is invalid - ");
@@ -143,11 +159,19 @@ public class Checkers {
 			 }
 		 }while(isMovevalid);
 		 
-	
+		
 
+		
 		switchPlayer();
 
 
+	}
+
+	private void printMove(Move move) {
+		if(currentPlayer instanceof Computer) {
+			System.out.println("Last Move was : Initial Cordinates : " + move.getInitialXCoor() + " " + move.getInitialYCoor()
+								+ " Final Coordinates : " + move.getEndingXCoor() + " " + move.getEndingYCoor());
+		}
 	}
 
 	private void switchPlayer() {
