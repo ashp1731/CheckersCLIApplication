@@ -59,7 +59,8 @@ public class Board {
 //		// If move is neither a simple one or a jump, it is not legal.
 //		return false;
 		ValidMoves ValidMoves= getLegalMoves(color);
-		return ValidMoves.getValidJumps().contains(move)||(ValidMoves.getValidJumps().size()==0 &&ValidMoves.getValidMoves().contains(move));
+//		return ValidMoves.getValidJumps().contains(move)||(ValidMoves.getValidJumps().size()==0 &&ValidMoves.getValidMoves().contains(move));
+		return ValidMoves.getValidJumps().contains(move) || ValidMoves.getValidMoves().contains(move);
 	}
 
 	public Board() {
@@ -130,25 +131,28 @@ public class Board {
 		}
 
 		// Jump Logic
-		if (canJump(squares[move.getInitialXCoor()][move.getInitialYCoor()].getPiece().getColor(), move.getInitialXCoor(),
-				move.getInitialYCoor(), move.getInitialXCoor() + 1, move.getInitialYCoor() + 1,
-				move.getInitialXCoor() + 2, move.getInitialYCoor() + 2))
-			squares[move.getInitialXCoor() + 1][move.getInitialYCoor() + 1].setPiece(pieceEmpty);
+		if (move.isJumpMove()) {
+			if (canJump(squares[move.getInitialXCoor()][move.getInitialYCoor()].getPiece().getColor(), move.getInitialXCoor(),
+					move.getInitialYCoor(), move.getInitialXCoor() + 1, move.getInitialYCoor() + 1,
+					move.getInitialXCoor() + 2, move.getInitialYCoor() + 2))
+				squares[move.getInitialXCoor() + 1][move.getInitialYCoor() + 1].setPiece(pieceEmpty);
 
-		if (canJump(squares[move.getInitialXCoor()][move.getInitialYCoor()].getPiece().getColor(), move.getInitialXCoor(),
-				move.getInitialYCoor(), move.getInitialXCoor() - 1, move.getInitialYCoor() - 1,
-				move.getInitialXCoor() - 2, move.getInitialYCoor() - 2))
-			squares[move.getInitialXCoor() - 1][move.getInitialYCoor() - 1].setPiece(pieceEmpty);
+			if (canJump(squares[move.getInitialXCoor()][move.getInitialYCoor()].getPiece().getColor(), move.getInitialXCoor(),
+					move.getInitialYCoor(), move.getInitialXCoor() - 1, move.getInitialYCoor() - 1,
+					move.getInitialXCoor() - 2, move.getInitialYCoor() - 2))
+				squares[move.getInitialXCoor() - 1][move.getInitialYCoor() - 1].setPiece(pieceEmpty);
 
-		if (canJump(squares[move.getInitialXCoor()][move.getInitialYCoor()].getPiece().getColor(), move.getInitialXCoor(),
-				move.getInitialYCoor(), move.getInitialXCoor() - 1, move.getInitialYCoor() + 1,
-				move.getInitialXCoor() - 2, move.getInitialYCoor() + 2))
-			squares[move.getInitialXCoor() - 1][move.getInitialYCoor() + 1].setPiece(pieceEmpty);
+			if (canJump(squares[move.getInitialXCoor()][move.getInitialYCoor()].getPiece().getColor(), move.getInitialXCoor(),
+					move.getInitialYCoor(), move.getInitialXCoor() - 1, move.getInitialYCoor() + 1,
+					move.getInitialXCoor() - 2, move.getInitialYCoor() + 2))
+				squares[move.getInitialXCoor() - 1][move.getInitialYCoor() + 1].setPiece(pieceEmpty);
 
-		if (canJump(squares[move.getInitialXCoor()][move.getInitialYCoor()].getPiece().getColor(), move.getInitialXCoor(),
-				move.getInitialYCoor(), move.getInitialXCoor() + 1, move.getInitialYCoor() - 1,
-				move.getInitialXCoor() + 2, move.getInitialYCoor() - 2))
-			squares[move.getInitialXCoor() + 1][move.getInitialYCoor() - 1].setPiece(pieceEmpty);
+			if (canJump(squares[move.getInitialXCoor()][move.getInitialYCoor()].getPiece().getColor(), move.getInitialXCoor(),
+					move.getInitialYCoor(), move.getInitialXCoor() + 1, move.getInitialYCoor() - 1,
+					move.getInitialXCoor() + 2, move.getInitialYCoor() - 2))
+				squares[move.getInitialXCoor() + 1][move.getInitialYCoor() - 1].setPiece(pieceEmpty);
+		}
+
 		
 		squares[move.getInitialXCoor()][move.getInitialYCoor()].setPiece(pieceEmpty);
 		squares[move.getEndingXCoor()][move.getEndingYCoor()].setPiece(initialPiece);
@@ -184,9 +188,6 @@ public class Board {
 
 	public boolean canJump(String color, int r1, int c1, int r2, int c2, int r3, int c3) {
 		// check whether the player can legally jump from (r1,c1) to (r3,c3). It is
-		// assumed
-		// that the player has a piece at (r1,c1), that (r3,c3) is a position
-		// that is 2 rows and 2 columns distant from (r1,c1) and that
 		// (r2,c2) is the square between (r1,c1) and (r3,c3).
 
 		if (r3 < 0 || r3 >= 8 || c3 < 0 || c3 >= 8)
@@ -199,13 +200,13 @@ public class Board {
 		if (color.equalsIgnoreCase("r")) {
 			if (squares[r1][c1].getPiece().getColor().equals("r") && r3 < r1)
 				return false; // Regular red piece can only move up.
-			if (squares[r2][c2].getPiece().getColor() != "b" && squares[r2][c2].getPiece().getColor() != "B")
+			if (squares[r2][c2].getPiece().getColor() != "b"  && squares[r2][c2].getPiece().getColor() != "B")
 				return false; // There is no black piece to jump.
 			return true; // jump is legal
 		} else {
 			if (squares[r1][c1].getPiece().getColor().equals("b") && r3 > r1)
 				return false; // Regular black piece can only move up.
-			if (squares[r2][c2].getPiece().getColor() != "r" && squares[r2][c2].getPiece().getColor() != "R")
+			if (squares[r2][c2].getPiece().getColor() != "r" && squares[r2][c2].getPiece().getColor() != "R") 
 				return false; // There is no black piece to jump.
 			return true; // jump is legal
 		}
@@ -223,15 +224,15 @@ public class Board {
 		if (squares[r2][c2].getPiece().getColor() != null)
 			return false; // (r2,c2) already contains a piece.
 		
-		if (color == "R" || color == "B")
+		if (color.equals("R") || color.equals("B"))
 			return true; 
 
-		if (color == "r") {
-			if (squares[r1][c1].getPiece().getColor() == "r" && r2 < r1)
+		if (color.equals("r")) {
+			if (squares[r1][c1].getPiece().getColor().equals("r")  && r2 < r1)
 				return false; // Regular red piece can only move down.
 			return true; // The move is legal.
 		} else {
-			if (squares[r1][c1].getPiece().getColor() == "b" && r2 > r1)
+			if (squares[r1][c1].getPiece().getColor().equals("b") && r2 > r1)
 				return false; // Regular black piece can only move up.
 			return true; // The move is legal.
 			

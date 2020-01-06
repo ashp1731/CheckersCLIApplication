@@ -174,50 +174,6 @@ public class Checkers {
 		}
 	}
 
-//	public Move enterMove() {
-//		Move Move = new Move();
-//		if (currentPlayer instanceof Human) {
-//			System.out.println("The current Player is:Human and color 'r'");
-//
-//		}
-//
-//		System.out.println("Which place do you want to move?:");
-//
-//		int xInitial = input.nextInt() - 1;
-//		int yInitial = input.nextInt() - 1;
-//		if (currentPlayer.getColor() == "r" && xInitial == 'b') {
-//			System.out.println("Not Your Turn!");
-//		}
-//		String color = gameBoard.getSquares()[xInitial][yInitial].getPiece().getColor();
-//		if (color == currentPlayer.getColor()) {
-//			System.out.println("Your Turn");
-//		} else if (currentPlayer.getColor() != color) {
-//			System.out.println("Not Your Turn");
-//		}
-//
-//		System.out.println("Where do you want to move it to?:");
-//		int xFinal = input.nextInt() - 1;
-//		int yFinal = input.nextInt() - 1;
-//
-//		if (xInitial >= 0 && yInitial >= 0 && xFinal >= 0 && yFinal >= 0)
-//
-//		{
-//			Move = new Move(xInitial, yInitial, xFinal, yFinal);
-//		
-//		}
-//		
-//		if(gameBoard.isMoveLegal(Move,currentPlayer.getColor())) {
-//		gameBoard.movePiece(Move);
-//	}
-//	else {
-//		System.out.println("Invalid Move!");
-//		currentPlayer.makemove(gameBoard);
-//	}
-//		
-//
-//		return Move;
-//	}
-
 	private Move createNextMoveForSamePiece(Move move) {
 		Move moveJump = new Move();
 		
