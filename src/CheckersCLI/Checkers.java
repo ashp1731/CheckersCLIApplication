@@ -9,7 +9,7 @@ public class Checkers {
 	private Board gameBoard;
 	private Player playerOne;
 	private Player playerTwo;
-	private boolean isInProgress;
+	private boolean isInProgress = false;
 	Scanner scanner = new Scanner(System.in);
 
 	public Board getGameBoard() {
@@ -52,38 +52,52 @@ public class Checkers {
 	}
 
 	public void setupByUser() {
-		System.out.println("Enter 'Start' to begin the game");
-		String input = scanner.nextLine();
-		input = input.toLowerCase();
-		if (input.equals("start")) {
-			System.out.println("Please select the opponent'Human' or'Computer'.");
-			
-			boolean opponentSelected = false;
-			while(!opponentSelected) {
-				String opponent = scanner.nextLine();
-				opponent = opponent.toLowerCase();
+		
+		try {
+			System.out.println("Enter 'Start' to begin the game");
+			String input = scanner.nextLine();
+			input = input.toLowerCase();
+			if (input.equals("start")) {
+				System.out.println("Please select the opponent'Human' or'Computer'.");
 				
-				playerOne = new Human("r", scanner);
-				currentPlayer = playerOne;
-				
-				if (opponent.equals("human")) {
-					playerTwo = new Human("b", scanner);
-					opponentSelected = true;
-					isInProgress = true;
-				} else if (opponent.equals("Computer")) {
-					playerTwo = new Computer("b");
-					opponentSelected = true;
-					isInProgress = true;
-				} else {
-					System.out.println("Please select the opponent'Human' or'Computer'.");
-					//opponent = scanner.nextLine();
-					isInProgress = true;
+				boolean opponentSelected = false;
+				while(!opponentSelected) {
+					String opponent = scanner.nextLine();
+					opponent = opponent.toLowerCase();
+					
+					playerOne = new Human("r", scanner);
+					currentPlayer = playerOne;
+					
+					if (opponent.equals("human")) {
+						playerTwo = new Human("b", scanner);
+						opponentSelected = true;
+						isInProgress = true;
+					} else if (opponent.equals("Computer")) {
+						playerTwo = new Computer("b");
+						opponentSelected = true;
+						isInProgress = true;
+					} else {
+						System.out.println("Please select the opponent'Human' or'Computer'.");
+						//opponent = scanner.nextLine();
+//						isInProgress = true;
+					}
 				}
 			}
+			else {
+				System.out.println("Invalid Input");
+				System.out.println("Enter 'Start' to begin the game");
+				input = scanner.nextLine();
+			}
+			if (isInProgress) {
+				displayBoard();
+			}
+		} catch (InputMismatchException ex) {
+			System.out.println("Invalid Input");
+			System.out.println("Enter 'Start' to begin the game");
+			String input = scanner.nextLine();
 		}
-		if (isInProgress=true) {
-			displayBoard();
-		}
+		
+
 
 	}
 
@@ -98,7 +112,7 @@ public class Checkers {
 		Move moves=new Move();
 		 boolean isMovevalid=false; 
 		 do {
-			 moves=currentPlayer.makemove(gameBoard);
+			 moves=currentPlayer.makeMove(gameBoard);
 			if (gameBoard.isMoveLegal(moves,currentPlayer.getColor())){
 				gameBoard.movePiece(moves);
 				
@@ -116,7 +130,6 @@ public class Checkers {
 							jumpContinue = false;
 						} else {
 							jumpContinue = true;
-							System.out.println("Jumping: " + calcMoveJump);
 							gameBoard.movePiece(calcMoveJump);
 						}
 					} while (jumpContinue);

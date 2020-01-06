@@ -16,7 +16,7 @@ abstract public class Player{
 	public void setColor(String color) {
 		this.color = color;
 	}
-	 abstract public Move makemove(Board board) ;
+	 abstract public Move makeMove(Board board) ;
 	 
 		
 	}

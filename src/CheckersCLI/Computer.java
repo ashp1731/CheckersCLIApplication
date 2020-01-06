@@ -17,7 +17,7 @@ public class Computer extends Player {
 	public Boolean isMovingLegal() {
 		return(true);
 }
-	 public Move makemove(Board board) {
+	 public Move makeMove(Board board) {
 			ValidMoves validMoves = board.getLegalMoves(this.getColor());
 			Move move = new Move();
 			
