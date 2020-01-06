@@ -39,6 +39,10 @@ public class Move {
 	public void setEndingYCoor(int endingYCoor) {
 		this.endingYCoor = endingYCoor;
 	}
+	
+	public boolean isJumpMove() {
+		return Math.abs((getEndingXCoor() - getInitialXCoor())) > 1;
+	}
 
 	public Move(int initialXCoor, int initialYCoor, int endingXCoor, int endingYCoor) {
 		this.initialXCoor = initialXCoor;

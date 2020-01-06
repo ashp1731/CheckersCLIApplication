@@ -11,7 +11,7 @@ public class Checkers {
 	private Player playerTwo;
 	private boolean isInProgress;
 	Scanner scanner = new Scanner(System.in);
-	java.util.Scanner input;
+
 	public Board getGameBoard() {
 		return gameBoard;
 	}
@@ -101,6 +101,27 @@ public class Checkers {
 			 moves=currentPlayer.makemove(gameBoard);
 			if (gameBoard.isMoveLegal(moves,currentPlayer.getColor())){
 				gameBoard.movePiece(moves);
+				
+				boolean jumpContinue = false;
+				if (moves.isJumpMove()) {
+					Move moveJump = createNextMoveForSamePiece(moves);
+					
+					do {
+						if(jumpContinue) {
+							moveJump = createNextMoveForSamePiece(moveJump);
+						}
+						
+						Move calcMoveJump = gameBoard.calculateNextJump(currentPlayer.getColor(), moveJump);
+						if (calcMoveJump == null) {
+							jumpContinue = false;
+						} else {
+							jumpContinue = true;
+							System.out.println("Jumping: " + calcMoveJump);
+							gameBoard.movePiece(calcMoveJump);
+						}
+					} while (jumpContinue);
+				}
+				
 				isMovevalid=false;
 			} 
 			else {
@@ -110,13 +131,17 @@ public class Checkers {
 		 
 	
 
+		switchPlayer();
+
+
+	}
+
+	private void switchPlayer() {
 		if (currentPlayer.getColor() == playerOne.getColor()) {
 			currentPlayer = playerTwo;
 		} else {
 			currentPlayer = playerOne;
 		}
-
-
 	}
 	
 
@@ -192,6 +217,15 @@ public class Checkers {
 //		return Move;
 //	}
 
+	private Move createNextMoveForSamePiece(Move move) {
+		Move moveJump = new Move();
+		
+		//Start of jumpMove is the end of original move.
+		moveJump.setInitialXCoor(move.getEndingXCoor());
+		moveJump.setInitialYCoor(move.getEndingYCoor());
+		return moveJump;
+	}
+	
 	public static void main(String[] args) {
 
 		Checkers checkersGame = new Checkers();

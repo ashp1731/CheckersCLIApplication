@@ -3,7 +3,6 @@ package CheckersCLI;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-
 public class Board {
 
 	public static final int SIZE = 8;
@@ -116,26 +115,18 @@ public class Board {
 
 		Piece initialPiece = new Piece();
 		initialPiece = squares[move.getInitialXCoor()][move.getInitialYCoor()].getPiece();
-		squares[move.getInitialXCoor()][move.getInitialYCoor()].setPiece(pieceEmpty);
-		squares[move.getEndingXCoor()][move.getEndingYCoor()].setPiece(initialPiece);
-
-		Piece kingPiece;
+		
 		if (squares[move.getInitialXCoor()][move.getInitialYCoor()].getPiece().getColor() == "r"
 				&& move.getEndingXCoor() == 7) {
 
-			kingPiece = squares[move.getInitialXCoor()][move.getInitialYCoor()].getPiece();
-			kingPiece.setRank("king");
-			kingPiece.setColor("R");
-			squares[move.getEndingXCoor()][move.getEndingYCoor()].setPiece(kingPiece);
+			initialPiece.setRank("king");
+			initialPiece.setColor("R");
 
 		} else if (squares[move.getInitialXCoor()][move.getInitialYCoor()].getPiece().getColor() == "b"
 				&& move.getEndingXCoor() == 0) {
 
-			kingPiece = squares[move.getInitialXCoor()][move.getInitialYCoor()].getPiece();
-			kingPiece.setRank("king");
-			kingPiece.setColor("B");
-			squares[move.getEndingXCoor()][move.getEndingYCoor()].setPiece(kingPiece);
-
+			initialPiece.setRank("king");
+			initialPiece.setColor("B");
 		}
 
 		// Jump Logic
@@ -162,6 +153,33 @@ public class Board {
 		squares[move.getInitialXCoor()][move.getInitialYCoor()].setPiece(pieceEmpty);
 		squares[move.getEndingXCoor()][move.getEndingYCoor()].setPiece(initialPiece);
 
+	}
+	
+	public Move calculateNextJump (String color, Move move) {
+		int xInitialJump = move.getInitialXCoor(), yInitialJump = move.getInitialYCoor();
+		
+		if (canJump(color, xInitialJump, yInitialJump, xInitialJump + 1,
+				yInitialJump + 1, xInitialJump + 2, yInitialJump + 2)) {
+			move.setEndingXCoor(xInitialJump + 2);
+			move.setEndingYCoor(yInitialJump + 2);
+			return move;
+		} else if (canJump(color, xInitialJump, yInitialJump, xInitialJump - 1,
+				yInitialJump - 1, xInitialJump - 2, yInitialJump - 2)) {
+			move.setEndingXCoor(xInitialJump - 2);
+			move.setEndingYCoor(yInitialJump - 2);
+			return move;
+		} else if (canJump(color, xInitialJump, yInitialJump, xInitialJump - 1,
+				yInitialJump + 1, xInitialJump - 2, yInitialJump + 2)) {
+			move.setEndingXCoor(xInitialJump - 2);
+			move.setEndingYCoor(yInitialJump + 2);
+			return move;
+		} else if (canJump(color, xInitialJump, yInitialJump, xInitialJump + 1,
+				yInitialJump - 1, xInitialJump + 2, yInitialJump - 2)) {
+			move.setEndingXCoor(xInitialJump + 2);
+			move.setEndingYCoor(yInitialJump - 2);
+			return move;
+		} 
+		return null;
 	}
 
 	public boolean canJump(String color, int r1, int c1, int r2, int c2, int r3, int c3) {
@@ -257,7 +275,7 @@ public class Board {
 					if (canMove(color, row, col, row + 1, col + 1))
 						moves.add(new Move(row, col, row + 1, col + 1));
 					if (canMove(color, row, col, row - 1, col + 1))
-						moves.add(new Move(row, col, row -0 1, col + 1));
+						moves.add(new Move(row, col, row - 1, col + 1));
 					if (canMove(color, row, col, row + 1, col - 1))
 						moves.add(new Move(row, col, row + 1, col - 1));
 					if (canMove(color, row, col, row - 1, col - 1))
