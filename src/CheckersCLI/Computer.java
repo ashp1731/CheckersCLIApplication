@@ -20,14 +20,22 @@ public class Computer extends Player {
 	 public Move makemove(Board board) {
 			ValidMoves validMoves = board.getLegalMoves(this.getColor());
 			Move move = new Move();
+			int arraySize;
+			if(validMoves.getValidJumps().size()>0){
+				arraySize = validMoves.getValidJumps().size();
+				int rand=(int)(Math.random()*arraySize);
+				return move=validMoves.getValidJumps().get(rand);
+			}
+			else if(validMoves.getValidMoves().size()>0){
+				arraySize = validMoves.getValidMoves().size();
+				int rand=(int)(Math.random()*arraySize);
+				return move=validMoves.getValidMoves().get(rand);
+			}
+			else {
+				return null;
+			}
 			
-			// Logic to randomly select Move/Jump
-			if(validMoves.getValidJumps().isEmpty()) {
-				if(!validMoves.getValidMoves().isEmpty()) {
 					
-				}
-			}		
-					
-			return move;
+			
 	 }
 }
