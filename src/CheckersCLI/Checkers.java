@@ -61,7 +61,7 @@ public class Checkers {
 			boolean opponentSelected = false;
 			while(!opponentSelected) {
 				String opponent = scanner.nextLine();
-				opponent.toLowerCase();
+				opponent = opponent.toLowerCase();
 				
 				playerOne = new Human("r", scanner);
 				currentPlayer = playerOne;
@@ -76,7 +76,7 @@ public class Checkers {
 					isInProgress = true;
 				} else {
 					System.out.println("Please select the opponent'Human' or'Computer'.");
-					opponent = scanner.nextLine();
+					//opponent = scanner.nextLine();
 					isInProgress = true;
 				}
 			}
@@ -125,6 +125,7 @@ public class Checkers {
 				isMovevalid=false;
 			} 
 			else {
+				System.out.println("This move is invalid - ");
 				  isMovevalid=true;
 			 }
 		 }while(isMovevalid);

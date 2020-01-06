@@ -196,14 +196,14 @@ public class Board {
 			return false; // (r3,c3) already contains a piece.
 		}
 
-		if (color == "r") {
-			if (squares[r1][c1].getPiece().getColor() == "r" && r3 < r1)
+		if (color.equalsIgnoreCase("r")) {
+			if (squares[r1][c1].getPiece().getColor().equals("r") && r3 < r1)
 				return false; // Regular red piece can only move up.
 			if (squares[r2][c2].getPiece().getColor() != "b" && squares[r2][c2].getPiece().getColor() != "B")
 				return false; // There is no black piece to jump.
 			return true; // jump is legal
 		} else {
-			if (squares[r1][c1].getPiece().getColor() == "b" && r3 > r1)
+			if (squares[r1][c1].getPiece().getColor().equals("b") && r3 > r1)
 				return false; // Regular black piece can only move up.
 			if (squares[r2][c2].getPiece().getColor() != "r" && squares[r2][c2].getPiece().getColor() != "R")
 				return false; // There is no black piece to jump.
@@ -249,11 +249,9 @@ public class Board {
 		ArrayList<Move> moves = new ArrayList<>();
 		ValidMoves validMoves = new ValidMoves();
 		// Check possible jumps
-
 		for (int row = 0; row < 8; row++) {
 			for (int col = 0; col < 8; col++) {
-				if (squares[row][col].getPiece().getColor() == color 
-						|| squares[row][col].getPiece().getColor() == color.toUpperCase()) {
+				if (color.equalsIgnoreCase(squares[row][col].getPiece().getColor())) {
 					if (canJump(color, row, col, row + 1, col + 1, row + 2, col + 2))
 						moves.add(new Move(row, col, row + 2, col + 2));
 					if (canJump(color, row, col, row - 1, col + 1, row - 2, col + 2))

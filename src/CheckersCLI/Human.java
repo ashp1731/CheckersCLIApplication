@@ -6,10 +6,12 @@ public class Human extends Player {
 	Scanner input = null;
 	public Human() {
 		super();
+		input = new Scanner(System.in);
 	}
 
 	public Human(String color) {
 		super(color);
+		input = new Scanner(System.in);
 	}
 
 	public Human(String color, Scanner input) {
@@ -34,12 +36,12 @@ public class Human extends Player {
 
 			System.out.println();
 			System.out.println("Which place do you want to move ? : ");
-			Scanner input = new Scanner(System.in);
+
 			int xInitial = input.nextInt() - 1;
 			int yInitial = input.nextInt() - 1;
 
 			String color = board.getSquares()[xInitial][yInitial].getPiece().getColor();
-			if (this.getColor() != color) {
+			if (!this.getColor() .equalsIgnoreCase(color) ) {
 				System.out.println("Not your turn!");
 				System.out.println("Which place do you want to move ? : ");
 				xInitial = input.nextInt() - 1;
