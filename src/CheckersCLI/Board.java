@@ -153,21 +153,23 @@ public class Board {
 //					move.getInitialXCoor() + 2, move.getInitialYCoor() - 2))
 //				squares[move.getInitialXCoor() + 1][move.getInitialYCoor() - 1].setPiece(pieceEmpty);
 			
-			if (move.getInitialXCoor() < move.getEndingXCoor() && move.getInitialYCoor() < move.getEndingYCoor()) {
-				squares[move.getInitialXCoor() + 1][move.getInitialYCoor() + 1].setPiece(pieceEmpty);
-			}
+//			if (move.getInitialXCoor() < move.getEndingXCoor() && move.getInitialYCoor() < move.getEndingYCoor()) {
+//				squares[move.getInitialXCoor() + 1][move.getInitialYCoor() + 1].setPiece(pieceEmpty);
+//			}
+//			
+//			if (move.getInitialXCoor() < move.getEndingXCoor() && move.getInitialYCoor() > move.getEndingYCoor()) {
+//				squares[move.getInitialXCoor() + 1][move.getInitialYCoor() - 1].setPiece(pieceEmpty);
+//			} 
+//			
+//			if (move.getInitialXCoor() > move.getEndingXCoor() && move.getInitialYCoor() < move.getEndingYCoor()) {
+//				squares[move.getInitialXCoor() - 1][move.getInitialYCoor() + 1].setPiece(pieceEmpty);
+//			}
+//			
+//			if (move.getInitialXCoor() > move.getEndingXCoor() && move.getInitialYCoor() > move.getEndingYCoor()) {
+//				squares[move.getInitialXCoor() - 1][move.getInitialYCoor() - 1].setPiece(pieceEmpty);
+//			}
 			
-			if (move.getInitialXCoor() < move.getEndingXCoor() && move.getInitialYCoor() > move.getEndingYCoor()) {
-				squares[move.getInitialXCoor() + 1][move.getInitialYCoor() - 1].setPiece(pieceEmpty);
-			} 
-			
-			if (move.getInitialXCoor() > move.getEndingXCoor() && move.getInitialYCoor() < move.getEndingYCoor()) {
-				squares[move.getInitialXCoor() - 1][move.getInitialYCoor() + 1].setPiece(pieceEmpty);
-			}
-			
-			if (move.getInitialXCoor() > move.getEndingXCoor() && move.getInitialYCoor() > move.getEndingYCoor()) {
-				squares[move.getInitialXCoor() - 1][move.getInitialYCoor() - 1].setPiece(pieceEmpty);
-			}
+			squares[(move.getInitialXCoor() + move.getEndingXCoor()) / 2][(move.getInitialYCoor() + move.getEndingYCoor()) / 2].setPiece(pieceEmpty);
 		}
 
 		
