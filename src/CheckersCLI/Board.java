@@ -132,25 +132,42 @@ public class Board {
 
 		// Jump Logic
 		if (move.isJumpMove()) {
-			if (canJump(squares[move.getInitialXCoor()][move.getInitialYCoor()].getPiece().getColor(), move.getInitialXCoor(),
-					move.getInitialYCoor(), move.getInitialXCoor() + 1, move.getInitialYCoor() + 1,
-					move.getInitialXCoor() + 2, move.getInitialYCoor() + 2))
+//			squares[move.getInitialXCoor() + 1][move.getInitialYCoor() + 1].setPiece(pieceEmpty);
+//			if (canJump(squares[move.getInitialXCoor()][move.getInitialYCoor()].getPiece().getColor(), move.getInitialXCoor(),
+//					move.getInitialYCoor(), move.getInitialXCoor() + 1, move.getInitialYCoor() + 1,
+//					move.getInitialXCoor() + 2, move.getInitialYCoor() + 2))
+//				squares[move.getInitialXCoor() + 1][move.getInitialYCoor() + 1].setPiece(pieceEmpty);
+//
+//			if (canJump(squares[move.getInitialXCoor()][move.getInitialYCoor()].getPiece().getColor(), move.getInitialXCoor(),
+//					move.getInitialYCoor(), move.getInitialXCoor() - 1, move.getInitialYCoor() - 1,
+//					move.getInitialXCoor() - 2, move.getInitialYCoor() - 2))
+//				squares[move.getInitialXCoor() - 1][move.getInitialYCoor() - 1].setPiece(pieceEmpty);
+//
+//			if (canJump(squares[move.getInitialXCoor()][move.getInitialYCoor()].getPiece().getColor(), move.getInitialXCoor(),
+//					move.getInitialYCoor(), move.getInitialXCoor() - 1, move.getInitialYCoor() + 1,
+//					move.getInitialXCoor() - 2, move.getInitialYCoor() + 2))
+//				squares[move.getInitialXCoor() - 1][move.getInitialYCoor() + 1].setPiece(pieceEmpty);
+//
+//			if (canJump(squares[move.getInitialXCoor()][move.getInitialYCoor()].getPiece().getColor(), move.getInitialXCoor(),
+//					move.getInitialYCoor(), move.getInitialXCoor() + 1, move.getInitialYCoor() - 1,
+//					move.getInitialXCoor() + 2, move.getInitialYCoor() - 2))
+//				squares[move.getInitialXCoor() + 1][move.getInitialYCoor() - 1].setPiece(pieceEmpty);
+			
+			if (move.getInitialXCoor() < move.getEndingXCoor() && move.getInitialYCoor() < move.getEndingYCoor()) {
 				squares[move.getInitialXCoor() + 1][move.getInitialYCoor() + 1].setPiece(pieceEmpty);
-
-			if (canJump(squares[move.getInitialXCoor()][move.getInitialYCoor()].getPiece().getColor(), move.getInitialXCoor(),
-					move.getInitialYCoor(), move.getInitialXCoor() - 1, move.getInitialYCoor() - 1,
-					move.getInitialXCoor() - 2, move.getInitialYCoor() - 2))
-				squares[move.getInitialXCoor() - 1][move.getInitialYCoor() - 1].setPiece(pieceEmpty);
-
-			if (canJump(squares[move.getInitialXCoor()][move.getInitialYCoor()].getPiece().getColor(), move.getInitialXCoor(),
-					move.getInitialYCoor(), move.getInitialXCoor() - 1, move.getInitialYCoor() + 1,
-					move.getInitialXCoor() - 2, move.getInitialYCoor() + 2))
-				squares[move.getInitialXCoor() - 1][move.getInitialYCoor() + 1].setPiece(pieceEmpty);
-
-			if (canJump(squares[move.getInitialXCoor()][move.getInitialYCoor()].getPiece().getColor(), move.getInitialXCoor(),
-					move.getInitialYCoor(), move.getInitialXCoor() + 1, move.getInitialYCoor() - 1,
-					move.getInitialXCoor() + 2, move.getInitialYCoor() - 2))
+			}
+			
+			if (move.getInitialXCoor() < move.getEndingXCoor() && move.getInitialYCoor() > move.getEndingYCoor()) {
 				squares[move.getInitialXCoor() + 1][move.getInitialYCoor() - 1].setPiece(pieceEmpty);
+			} 
+			
+			if (move.getInitialXCoor() > move.getEndingXCoor() && move.getInitialYCoor() < move.getEndingYCoor()) {
+				squares[move.getInitialXCoor() - 1][move.getInitialYCoor() + 1].setPiece(pieceEmpty);
+			}
+			
+			if (move.getInitialXCoor() > move.getEndingXCoor() && move.getInitialYCoor() > move.getEndingYCoor()) {
+				squares[move.getInitialXCoor() - 1][move.getInitialYCoor() - 1].setPiece(pieceEmpty);
+			}
 		}
 
 		
@@ -165,21 +182,6 @@ public class Board {
 		ValidMoves validMoves = new ValidMoves();
 		
 		moves = new ArrayList<>();
-		for (int row = 0; row < 8; row++) {
-			for (int col = 0; col < 8; col++) {
-				if (color.equalsIgnoreCase(squares[row][col].getPiece().getColor())) {
-					if (canJump(color, row, col, row + 1, col + 1, row + 2, col + 2))
-						moves.add(new Move(row, col, row + 2, col + 2));
-					if (canJump(color, row, col, row - 1, col + 1, row - 2, col + 2))
-						moves.add(new Move(row, col, row - 2, col + 2));
-					if (canJump(color, row, col, row + 1, col - 1, row + 2, col - 2))
-						moves.add(new Move(row, col, row + 2, col - 2));
-					if (canJump(color, row, col, row - 1, col - 1, row - 2, col - 2))
-						moves.add(new Move(row, col, row - 2, col - 2));
-				}
-			}
-			
-		}
 		
 		if (canJump(color, xInitialJump, yInitialJump, xInitialJump + 1,
 				yInitialJump + 1, xInitialJump + 2, yInitialJump + 2)) {

@@ -136,6 +136,7 @@ public class Checkers {
 						} else {
 							jumpContinue = true;
 							gameBoard.movePiece(calcMoveJump);
+							moveJump = calcMoveJump;
 						}
 					} while (jumpContinue);
 
@@ -223,7 +224,7 @@ public class Checkers {
 	public void displayEndOfGameMessage() {
 		String playerWin;
 		if (!isInProgress) {
-			System.out.println((playerWin = winner.equalsIgnoreCase("r") ? "Player One" : "Player Two") + " is winner");
+			System.out.println("Congratulations!! " + (playerWin = winner.equalsIgnoreCase("r") ? "Player One" : "Player Two") + " is winner!!!");
 		}
 	}
 
