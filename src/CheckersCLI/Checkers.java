@@ -57,37 +57,40 @@ public class Checkers {
 			System.out.println("Enter 'Start' to begin the game");
 			String input = scanner.nextLine();
 			input = input.toLowerCase();
-			if (input.equals("start")) {
-				System.out.println("Please select the opponent'Human' or'Computer'.");
-				
-				boolean opponentSelected = false;
-				while(!opponentSelected) {
-					String opponent = scanner.nextLine();
-					opponent = opponent.toLowerCase();
+//			do {
+				if (input.equals("start")) {
+					System.out.println("Please select the opponent'Human' or'Computer'.");
 					
-					playerOne = new Human("r", scanner);
-					currentPlayer = playerOne;
-					
-					if (opponent.equals("human")) {
-						playerTwo = new Human("b", scanner);
-						opponentSelected = true;
-						isInProgress = true;
-					} else if (opponent.equals("computer")) {
-						playerTwo = new Computer("b");
-						opponentSelected = true;
-						isInProgress = true;
-					} else {
-						System.out.println("Please select the opponent'Human' or'Computer'.");
-						//opponent = scanner.nextLine();
-//						isInProgress = true;
+					boolean opponentSelected = false;
+					while(!opponentSelected) {
+						String opponent = scanner.nextLine();
+						opponent = opponent.toLowerCase();
+						
+						playerOne = new Human("r", scanner);
+						currentPlayer = playerOne;
+						
+						if (opponent.equals("human")) {
+							playerTwo = new Human("b", scanner);
+							opponentSelected = true;
+							isInProgress = true;
+						} else if (opponent.equals("computer")) {
+							playerTwo = new Computer("b");
+							opponentSelected = true;
+							isInProgress = true;
+						} else {
+							System.out.println("Please select the opponent'Human' or'Computer'.");
+							//opponent = scanner.nextLine();
+//							isInProgress = true;
+						}
 					}
 				}
-			}
-			else {
-				System.out.println("Invalid Input");
-				System.out.println("Enter 'Start' to begin the game");
-				input = scanner.nextLine();
-			}
+				else {
+					System.out.println("Invalid Input");
+					System.out.println("Enter 'Start' to begin the game");
+					input = scanner.nextLine();
+				}
+//			} while(isInProgress = false);
+
 			if (isInProgress) {
 				displayBoard();
 			}
@@ -160,6 +163,17 @@ public class Checkers {
 				  isMovevalid=true;
 			 }
 		 }while(isMovevalid);	
+		 
+//		 String checkWinner;
+//		 if (currentPlayer.getColor() == playerOne.getColor()) {
+//				checkWinner = playerTwo.getColor();
+//			} else {
+//				checkWinner = playerOne.getColor();
+//			}
+//		 	 
+//		 if(gameBoard.isWinner(colorWinner){
+//			 isInProgress = false;
+//		 }
 		switchPlayer();
 	}
 

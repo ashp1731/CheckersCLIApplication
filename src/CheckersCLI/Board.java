@@ -104,9 +104,9 @@ public class Board {
 	}
 	
 
-	public Board(Square[] square) {
+	public Board(Square[][] square) {
 		super();
-		this.squares = squares;
+		this.squares = square;
 	}
 
  
@@ -269,8 +269,7 @@ public class Board {
 		moves = new ArrayList<>();
 		for (int row = 0; row < 8; row++) {
 			for (int col = 0; col < 8; col++) {
-				if (squares[row][col].getPiece().getColor() == color
-						|| squares[row][col].getPiece().getColor() == color.toUpperCase()) {
+				if (color.equalsIgnoreCase(squares[row][col].getPiece().getColor())) {
 					if (canMove(color, row, col, row + 1, col + 1))
 						moves.add(new Move(row, col, row + 1, col + 1));
 					if (canMove(color, row, col, row - 1, col + 1))
