@@ -96,9 +96,6 @@ public class Checkers {
 			System.out.println("Enter 'Start' to begin the game");
 			String input = scanner.nextLine();
 		}
-		
-
-
 	}
 
 	public boolean isInProgress() {
@@ -138,9 +135,14 @@ public class Checkers {
 						}
 					} while (jumpContinue);
 
-					printMove.setEndingXCoor(moveJump.getEndingXCoor() +1 );
-					printMove.setEndingYCoor(moveJump.getEndingYCoor() +1 );
-					printMove(printMove);
+					if(moveJump.getEndingXCoor() == 0) {
+						printMove.setEndingXCoor(moves.getEndingXCoor() +1 ); 
+						printMove.setEndingYCoor(moves.getEndingYCoor() +1 );
+					}
+					else {
+						printMove.setEndingXCoor(moveJump.getEndingXCoor() +1 );
+						printMove.setEndingYCoor(moveJump.getEndingYCoor() +1 );
+					}
 				}
 				else {
 					printMove.setEndingXCoor(moves.getEndingXCoor() +1 );
@@ -148,23 +150,17 @@ public class Checkers {
 				}
 				
 				isMovevalid=false;
-				
-				 if(currentPlayer instanceof Computer) {
-					 printMove(printMove);
-				 }
+				printMove(printMove);
+//				 if(currentPlayer instanceof Computer) {
+//					 
+//				 }
 			} 
 			else {
 				System.out.println("This move is invalid - ");
 				  isMovevalid=true;
 			 }
-		 }while(isMovevalid);
-		 
-		
-
-		
+		 }while(isMovevalid);	
 		switchPlayer();
-
-
 	}
 
 	private void printMove(Move move) {

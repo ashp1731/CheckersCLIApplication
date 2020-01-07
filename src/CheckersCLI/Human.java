@@ -21,9 +21,6 @@ public class Human extends Player {
 		
 	}
 	
-	public String getMakemove() {
-		return "move";
-	}
 	public Boolean isMovingLegal() {
 		return(true);
 }

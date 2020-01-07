@@ -11,9 +11,6 @@ public class Computer extends Player {
 		super(color);
 	}
 
-	public String getMakemove() {
-		return "move";
-	}
 	public Boolean isMovingLegal() {
 		return(true);
 }
