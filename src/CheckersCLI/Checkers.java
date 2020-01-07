@@ -10,6 +10,7 @@ public class Checkers {
 	private Player playerOne;
 	private Player playerTwo;
 	private boolean isInProgress = false;
+	private String winner;
 	Scanner scanner = new Scanner(System.in);
 
 	public Board getGameBoard() {
@@ -171,8 +172,12 @@ public class Checkers {
 //				checkWinner = playerOne.getColor();
 //			}
 //		 	 
-//		 if(gameBoard.isWinner(colorWinner){
+//		 if(gameBoard.isWinner(checkWinner){
 //			 isInProgress = false;
+//		 	 Winner = currentPlayer.getColor();
+//		 }
+//		 else {
+//			 switchPlayer();
 //		 }
 		switchPlayer();
 	}
@@ -216,8 +221,9 @@ public class Checkers {
 	}
 
 	public void displayEndOfGameMessage() {
+		String playerWin;
 		if (!isInProgress) {
-			System.out.println();
+			System.out.println((playerWin = winner.equalsIgnoreCase("r") ? "Player One" : "Player Two") + " is winner");
 		}
 	}
 
