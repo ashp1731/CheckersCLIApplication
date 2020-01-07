@@ -161,29 +161,56 @@ public class Board {
 	
 	public Move calculateNextJump (String color, Move move) {
 		int xInitialJump = move.getInitialXCoor(), yInitialJump = move.getInitialYCoor();
+		ArrayList<Move> moves = new ArrayList<>();
+		ValidMoves validMoves = new ValidMoves();
+		
+		moves = new ArrayList<>();
+		for (int row = 0; row < 8; row++) {
+			for (int col = 0; col < 8; col++) {
+				if (color.equalsIgnoreCase(squares[row][col].getPiece().getColor())) {
+					if (canJump(color, row, col, row + 1, col + 1, row + 2, col + 2))
+						moves.add(new Move(row, col, row + 2, col + 2));
+					if (canJump(color, row, col, row - 1, col + 1, row - 2, col + 2))
+						moves.add(new Move(row, col, row - 2, col + 2));
+					if (canJump(color, row, col, row + 1, col - 1, row + 2, col - 2))
+						moves.add(new Move(row, col, row + 2, col - 2));
+					if (canJump(color, row, col, row - 1, col - 1, row - 2, col - 2))
+						moves.add(new Move(row, col, row - 2, col - 2));
+				}
+			}
+			
+		}
 		
 		if (canJump(color, xInitialJump, yInitialJump, xInitialJump + 1,
 				yInitialJump + 1, xInitialJump + 2, yInitialJump + 2)) {
-			move.setEndingXCoor(xInitialJump + 2);
-			move.setEndingYCoor(yInitialJump + 2);
-			return move;
-		} else if (canJump(color, xInitialJump, yInitialJump, xInitialJump - 1,
+			moves.add(new Move(xInitialJump, yInitialJump, xInitialJump + 2, yInitialJump + 2));
+			
+		}
+
+		if (canJump(color, xInitialJump, yInitialJump, xInitialJump - 1,
 				yInitialJump - 1, xInitialJump - 2, yInitialJump - 2)) {
-			move.setEndingXCoor(xInitialJump - 2);
-			move.setEndingYCoor(yInitialJump - 2);
-			return move;
-		} else if (canJump(color, xInitialJump, yInitialJump, xInitialJump - 1,
+			moves.add(new Move(xInitialJump, yInitialJump, xInitialJump - 2, yInitialJump - 2));
+		}
+		
+		if (canJump(color, xInitialJump, yInitialJump, xInitialJump - 1,
 				yInitialJump + 1, xInitialJump - 2, yInitialJump + 2)) {
-			move.setEndingXCoor(xInitialJump - 2);
-			move.setEndingYCoor(yInitialJump + 2);
-			return move;
-		} else if (canJump(color, xInitialJump, yInitialJump, xInitialJump + 1,
-				yInitialJump - 1, xInitialJump + 2, yInitialJump - 2)) {
-			move.setEndingXCoor(xInitialJump + 2);
-			move.setEndingYCoor(yInitialJump - 2);
-			return move;
+			moves.add(new Move(xInitialJump, yInitialJump, xInitialJump - 2, yInitialJump + 2));
 		} 
-		return null;
+		if (canJump(color, xInitialJump, yInitialJump, xInitialJump + 1,
+				yInitialJump - 1, xInitialJump + 2, yInitialJump - 2)) {
+			moves.add(new Move(xInitialJump, yInitialJump, xInitialJump + 2, yInitialJump - 2));
+		} 
+		validMoves.setValidJumps(moves);
+		
+		int arraySize;
+		if(validMoves.getValidJumps().size() > 0) {
+			arraySize = validMoves.getValidJumps().size();
+			int rand = (int) (Math.random() * arraySize);
+			return move = validMoves.getValidJumps().get(rand);
+		}
+		else {
+			return null;
+		}
 	}
 
 	public boolean canJump(String color, int r1, int c1, int r2, int c2, int r3, int c3) {
