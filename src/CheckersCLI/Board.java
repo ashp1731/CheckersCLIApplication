@@ -319,13 +319,17 @@ public class Board {
 		boolean isWinner = true;
 		for (int row = 0; row < 8; row++) {
 			for (int col = 0; col < 8; col++) {
-				if (squares[row][col].getPiece().getColor()==(color)) {
+				if (color.equalsIgnoreCase(squares[row][col].getPiece().getColor())) {
 					isWinner = false;
 					break;
 				}
 			}
 		}
+		if(!isWinner) {
+			
+		}
 		return isWinner;
+		
 	}
 
 	@Override
