@@ -315,7 +315,18 @@ public class Board {
 		validMoves.setValidMoves(moves);
 		return validMoves;
 	}
-
+	public boolean getWinner(String color) {
+		boolean isWinner = true;
+		for (int row = 0; row < 8; row++) {
+			for (int col = 0; col < 8; col++) {
+				if (squares[row][col].getPiece().getColor()==(color)) {
+					isWinner = false;
+					break;
+				}
+			}
+		}
+		return isWinner;
+	}
 
 	@Override
 	public String toString() {

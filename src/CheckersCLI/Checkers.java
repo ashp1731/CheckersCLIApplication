@@ -166,21 +166,21 @@ public class Checkers {
 			 }
 		 }while(isMovevalid);	
 		 
-//		 String checkWinner;
-//		 if (currentPlayer.getColor() == playerOne.getColor()) {
-//				checkWinner = playerTwo.getColor();
-//			} else {
-//				checkWinner = playerOne.getColor();
-//			}
-//		 	 
-//		 if(gameBoard.isWinner(checkWinner){
-//			 isInProgress = false;
-//		 	 Winner = currentPlayer.getColor();
-//		 }
-//		 else {
-//			 switchPlayer();
-//		 }
-		switchPlayer();
+		 String checkWinner;
+		 if (currentPlayer.getColor() == playerOne.getColor()) {
+				checkWinner = playerTwo.getColor();
+			} else {
+				checkWinner = playerOne.getColor();
+			}
+		 	 
+		 if(gameBoard.getWinner(checkWinner)){
+			 isInProgress = false;
+		 	 winner = currentPlayer.getColor();
+		 }
+		 else {
+			 switchPlayer();
+		 }
+		
 	}
 
 	private void printMove(Move move) {
