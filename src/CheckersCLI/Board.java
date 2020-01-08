@@ -334,4 +334,25 @@ public class Board {
 
 	}
 
+	
+	
+	public boolean isWinner(String color)  {
+
+		boolean isWinner = true; 
+
+		    for (int row = 0; row < 8; row++) {
+		    for (int col = 0; col < 8; col++) { 
+		    	if (color.equals(squares[row][col].getPiece().getColor().toLowerCase()));
+		    		
+		    isWinner = false;
+		    break;
+		             }
+		    }
+		return isWinner;  
+		}
+
+
 }
+	
+	
+
