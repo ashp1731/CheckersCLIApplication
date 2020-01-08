@@ -53,43 +53,40 @@ public class Checkers {
 	}
 
 	public void setupByUser() {
-		
+
 		try {
 			System.out.println("Enter 'Start' to begin the game");
 			String input = scanner.nextLine();
 			input = input.toLowerCase();
 //			do {
-				if (input.equals("start")) {
-					System.out.println("Please select the opponent'Human' or'Computer'.");
-					
-					boolean opponentSelected = false;
-					while(!opponentSelected) {
-						String opponent = scanner.nextLine();
-						opponent = opponent.toLowerCase();
-						
-						playerOne = new Human("r", scanner);
-						currentPlayer = playerOne;
-						
-						if (opponent.equals("human")) {
-							playerTwo = new Human("b", scanner);
-							opponentSelected = true;
-							isInProgress = true;
-						} else if (opponent.equals("computer")) {
-							playerTwo = new Computer("b");
-							opponentSelected = true;
-							isInProgress = true;
-						} else {
-							System.out.println("Please select the opponent'Human' or'Computer'.");
-							//opponent = scanner.nextLine();
-//							isInProgress = true;
-						}
+			if (input.equals("start")) {
+				System.out.println("Please select the opponent'Human' or'Computer'.");
+
+				boolean opponentSelected = false;
+				while (!opponentSelected) {
+					String opponent = scanner.nextLine();
+					opponent = opponent.toLowerCase();
+
+					playerOne = new Human("r", scanner);
+					currentPlayer = playerOne;
+
+					if (opponent.equals("human")) {
+						playerTwo = new Human("b", scanner);
+						opponentSelected = true;
+						isInProgress = true;
+					} else if (opponent.equals("computer")) {
+						playerTwo = new Computer("b");
+						opponentSelected = true;
+						isInProgress = true;
+					} else {
+						System.out.println("Please select the opponent'Human' or'Computer'.");
 					}
 				}
-				else {
-					System.out.println("Invalid Input");
-					System.out.println("Enter 'Start' to begin the game");
-					input = scanner.nextLine();
-				}
+			} else {
+				System.out.println("Invalid Input");
+				System.out.println("Enter 'Start' to begin the game");
+				input = scanner.nextLine();
+			}
 //			} while(isInProgress = false);
 
 			if (isInProgress) {
@@ -110,26 +107,26 @@ public class Checkers {
 
 	public void currentPlayerTakeTurn() {
 
-		Move moves=new Move();
-		 boolean isMovevalid=false; 
-		 do {
-			 moves=currentPlayer.makeMove(gameBoard);
-			if (gameBoard.isMoveLegal(moves,currentPlayer.getColor())){
+		Move moves = new Move();
+		boolean isMovevalid = false;
+		do {
+			moves = currentPlayer.makeMove(gameBoard);
+			if (gameBoard.isMoveLegal(moves, currentPlayer.getColor())) {
 				gameBoard.movePiece(moves);
-				
+
 				Move printMove = new Move();
-				printMove.setInitialXCoor(moves.getInitialXCoor() +1 );
-				printMove.setInitialYCoor(moves.getInitialYCoor() +1 );
-				
+				printMove.setInitialXCoor(moves.getInitialXCoor() + 1);
+				printMove.setInitialYCoor(moves.getInitialYCoor() + 1);
+
 				boolean jumpContinue = false;
 				if (moves.isJumpMove()) {
 					Move moveJump = createNextMoveForSamePiece(moves);
-					
+
 					do {
-						if(jumpContinue) {
+						if (jumpContinue) {
 							moveJump = createNextMoveForSamePiece(moveJump);
 						}
-						
+
 						Move calcMoveJump = gameBoard.calculateNextJump(currentPlayer.getColor(), moveJump);
 						if (calcMoveJump == null) {
 							jumpContinue = false;
@@ -140,32 +137,26 @@ public class Checkers {
 						}
 					} while (jumpContinue);
 
-					if(moveJump.getEndingXCoor() == 0) {
-						printMove.setEndingXCoor(moves.getEndingXCoor() +1 ); 
-						printMove.setEndingYCoor(moves.getEndingYCoor() +1 );
+					if (moveJump.getEndingXCoor() == 0) {
+						printMove.setEndingXCoor(moves.getEndingXCoor() + 1);
+						printMove.setEndingYCoor(moves.getEndingYCoor() + 1);
+					} else {
+						printMove.setEndingXCoor(moveJump.getEndingXCoor() + 1);
+						printMove.setEndingYCoor(moveJump.getEndingYCoor() + 1);
 					}
-					else {
-						printMove.setEndingXCoor(moveJump.getEndingXCoor() +1 );
-						printMove.setEndingYCoor(moveJump.getEndingYCoor() +1 );
-					}
+				} else {
+					printMove.setEndingXCoor(moves.getEndingXCoor() + 1);
+					printMove.setEndingYCoor(moves.getEndingYCoor() + 1);
 				}
-				else {
-					printMove.setEndingXCoor(moves.getEndingXCoor() +1 );
-					printMove.setEndingYCoor(moves.getEndingYCoor() +1 );
-				}
-				
-				isMovevalid=false;
+
+				isMovevalid = false;
 				printMove(printMove);
-//				 if(currentPlayer instanceof Computer) {
-//					 
-//				 }
-			} 
-			else {
+			} else {
 				System.out.println("This move is invalid - ");
-				  isMovevalid=true;
-			 }
-		 }while(isMovevalid);	
-		 
+				isMovevalid = true;
+			}
+		} while (isMovevalid);
+
 //		 String checkWinner;
 //		 if (currentPlayer.getColor() == playerOne.getColor()) {
 //				checkWinner = playerTwo.getColor();
@@ -184,9 +175,10 @@ public class Checkers {
 	}
 
 	private void printMove(Move move) {
-		if(currentPlayer instanceof Computer) {
-			System.out.println("Last Move was : Initial Cordinates : " + move.getInitialXCoor() + " " + move.getInitialYCoor()
-								+ " Final Coordinates : " + move.getEndingXCoor() + " " + move.getEndingYCoor());
+		if (currentPlayer instanceof Computer) {
+			System.out.println(
+					"Last Move was : Initial Cordinates : " + move.getInitialXCoor() + " " + move.getInitialYCoor()
+							+ " Final Coordinates : " + move.getEndingXCoor() + " " + move.getEndingYCoor());
 		}
 	}
 
@@ -197,7 +189,6 @@ public class Checkers {
 			currentPlayer = playerOne;
 		}
 	}
-	
 
 	public void displayBoard() {
 
@@ -224,19 +215,20 @@ public class Checkers {
 	public void displayEndOfGameMessage() {
 		String playerWin;
 		if (!isInProgress) {
-			System.out.println("Congratulations!! " + (playerWin = winner.equalsIgnoreCase("r") ? "Player One" : "Player Two") + " is winner!!!");
+			System.out.println("Congratulations!! "
+					+ (playerWin = winner.equalsIgnoreCase("r") ? "Player One" : "Player Two") + " is winner!!!");
 		}
 	}
 
 	private Move createNextMoveForSamePiece(Move move) {
 		Move moveJump = new Move();
-		
-		//Start of jumpMove is the end of original move.
+
+		// Start of jumpMove is the end of original move.
 		moveJump.setInitialXCoor(move.getEndingXCoor());
 		moveJump.setInitialYCoor(move.getEndingYCoor());
 		return moveJump;
 	}
-	
+
 	public static void main(String[] args) {
 
 		Checkers checkersGame = new Checkers();

@@ -23,8 +23,8 @@ public class Board {
 	// create emplty method with moviec
 
 	// Checks if a move is valid.
-	public boolean isMoveLegal(Move move,String color) {
-		
+	public boolean isMoveLegal(Move move, String color) {
+
 //		int xfrom = movefrom.getInitialXCoor();
 //		int yfrom = movefrom.getInitialYCoor();
 //		int xto = moveto.getEndingXCoor();
@@ -58,7 +58,7 @@ public class Board {
 //		}
 //		// If move is neither a simple one or a jump, it is not legal.
 //		return false;
-		ValidMoves ValidMoves= getLegalMoves(color);
+		ValidMoves ValidMoves = getLegalMoves(color);
 //		return ValidMoves.getValidJumps().contains(move)||(ValidMoves.getValidJumps().size()==0 &&ValidMoves.getValidMoves().contains(move));
 		return ValidMoves.getValidJumps().contains(move) || ValidMoves.getValidMoves().contains(move);
 	}
@@ -67,14 +67,14 @@ public class Board {
 //		
 //		// Code to initialize the Board
 
-	squares = new Square[8][8];
+		squares = new Square[8][8];
 
-	for (int i = 0; i < 8; i++) {
-		for (int j = 0; j < 8; j++) {
-			squares[i][j] = new Square();
-			squares[i][j].setPiece(new Piece());
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+				squares[i][j] = new Square();
+				squares[i][j].setPiece(new Piece());
+			}
 		}
-	}
 
 		squares[0][1].setPiece(new Piece("r", "pawn"));
 		squares[0][3].setPiece(new Piece("r", "pawn"));
@@ -102,21 +102,19 @@ public class Board {
 		squares[7][4].setPiece(new Piece("b", "pawn"));
 		squares[7][6].setPiece(new Piece("b", "pawn"));
 	}
-	
 
 	public Board(Square[][] square) {
 		super();
 		this.squares = square;
 	}
 
- 
 	public void movePiece(Move move) {
 		// Move Piece Logic
 		Piece pieceEmpty = new Piece();
 
 		Piece initialPiece = new Piece();
 		initialPiece = squares[move.getInitialXCoor()][move.getInitialYCoor()].getPiece();
-		
+
 		if (squares[move.getInitialXCoor()][move.getInitialYCoor()].getPiece().getColor() == "r"
 				&& move.getEndingXCoor() == 7) {
 
@@ -132,87 +130,49 @@ public class Board {
 
 		// Jump Logic
 		if (move.isJumpMove()) {
-//			squares[move.getInitialXCoor() + 1][move.getInitialYCoor() + 1].setPiece(pieceEmpty);
-//			if (canJump(squares[move.getInitialXCoor()][move.getInitialYCoor()].getPiece().getColor(), move.getInitialXCoor(),
-//					move.getInitialYCoor(), move.getInitialXCoor() + 1, move.getInitialYCoor() + 1,
-//					move.getInitialXCoor() + 2, move.getInitialYCoor() + 2))
-//				squares[move.getInitialXCoor() + 1][move.getInitialYCoor() + 1].setPiece(pieceEmpty);
-//
-//			if (canJump(squares[move.getInitialXCoor()][move.getInitialYCoor()].getPiece().getColor(), move.getInitialXCoor(),
-//					move.getInitialYCoor(), move.getInitialXCoor() - 1, move.getInitialYCoor() - 1,
-//					move.getInitialXCoor() - 2, move.getInitialYCoor() - 2))
-//				squares[move.getInitialXCoor() - 1][move.getInitialYCoor() - 1].setPiece(pieceEmpty);
-//
-//			if (canJump(squares[move.getInitialXCoor()][move.getInitialYCoor()].getPiece().getColor(), move.getInitialXCoor(),
-//					move.getInitialYCoor(), move.getInitialXCoor() - 1, move.getInitialYCoor() + 1,
-//					move.getInitialXCoor() - 2, move.getInitialYCoor() + 2))
-//				squares[move.getInitialXCoor() - 1][move.getInitialYCoor() + 1].setPiece(pieceEmpty);
-//
-//			if (canJump(squares[move.getInitialXCoor()][move.getInitialYCoor()].getPiece().getColor(), move.getInitialXCoor(),
-//					move.getInitialYCoor(), move.getInitialXCoor() + 1, move.getInitialYCoor() - 1,
-//					move.getInitialXCoor() + 2, move.getInitialYCoor() - 2))
-//				squares[move.getInitialXCoor() + 1][move.getInitialYCoor() - 1].setPiece(pieceEmpty);
-			
-//			if (move.getInitialXCoor() < move.getEndingXCoor() && move.getInitialYCoor() < move.getEndingYCoor()) {
-//				squares[move.getInitialXCoor() + 1][move.getInitialYCoor() + 1].setPiece(pieceEmpty);
-//			}
-//			
-//			if (move.getInitialXCoor() < move.getEndingXCoor() && move.getInitialYCoor() > move.getEndingYCoor()) {
-//				squares[move.getInitialXCoor() + 1][move.getInitialYCoor() - 1].setPiece(pieceEmpty);
-//			} 
-//			
-//			if (move.getInitialXCoor() > move.getEndingXCoor() && move.getInitialYCoor() < move.getEndingYCoor()) {
-//				squares[move.getInitialXCoor() - 1][move.getInitialYCoor() + 1].setPiece(pieceEmpty);
-//			}
-//			
-//			if (move.getInitialXCoor() > move.getEndingXCoor() && move.getInitialYCoor() > move.getEndingYCoor()) {
-//				squares[move.getInitialXCoor() - 1][move.getInitialYCoor() - 1].setPiece(pieceEmpty);
-//			}
-			
-			squares[(move.getInitialXCoor() + move.getEndingXCoor()) / 2][(move.getInitialYCoor() + move.getEndingYCoor()) / 2].setPiece(pieceEmpty);
+			squares[(move.getInitialXCoor() + move.getEndingXCoor())
+					/ 2][(move.getInitialYCoor() + move.getEndingYCoor()) / 2].setPiece(pieceEmpty);
 		}
 
-		
 		squares[move.getInitialXCoor()][move.getInitialYCoor()].setPiece(pieceEmpty);
 		squares[move.getEndingXCoor()][move.getEndingYCoor()].setPiece(initialPiece);
 
 	}
-	
-	public Move calculateNextJump (String color, Move move) {
+
+	public Move calculateNextJump(String color, Move move) {
 		int xInitialJump = move.getInitialXCoor(), yInitialJump = move.getInitialYCoor();
 		ArrayList<Move> moves = new ArrayList<>();
 		ValidMoves validMoves = new ValidMoves();
-		
+
 		moves = new ArrayList<>();
-		
-		if (canJump(color, xInitialJump, yInitialJump, xInitialJump + 1,
-				yInitialJump + 1, xInitialJump + 2, yInitialJump + 2)) {
+
+		if (canJump(color, xInitialJump, yInitialJump, xInitialJump + 1, yInitialJump + 1, xInitialJump + 2,
+				yInitialJump + 2)) {
 			moves.add(new Move(xInitialJump, yInitialJump, xInitialJump + 2, yInitialJump + 2));
-			
+
 		}
 
-		if (canJump(color, xInitialJump, yInitialJump, xInitialJump - 1,
-				yInitialJump - 1, xInitialJump - 2, yInitialJump - 2)) {
+		if (canJump(color, xInitialJump, yInitialJump, xInitialJump - 1, yInitialJump - 1, xInitialJump - 2,
+				yInitialJump - 2)) {
 			moves.add(new Move(xInitialJump, yInitialJump, xInitialJump - 2, yInitialJump - 2));
 		}
-		
-		if (canJump(color, xInitialJump, yInitialJump, xInitialJump - 1,
-				yInitialJump + 1, xInitialJump - 2, yInitialJump + 2)) {
+
+		if (canJump(color, xInitialJump, yInitialJump, xInitialJump - 1, yInitialJump + 1, xInitialJump - 2,
+				yInitialJump + 2)) {
 			moves.add(new Move(xInitialJump, yInitialJump, xInitialJump - 2, yInitialJump + 2));
-		} 
-		if (canJump(color, xInitialJump, yInitialJump, xInitialJump + 1,
-				yInitialJump - 1, xInitialJump + 2, yInitialJump - 2)) {
+		}
+		if (canJump(color, xInitialJump, yInitialJump, xInitialJump + 1, yInitialJump - 1, xInitialJump + 2,
+				yInitialJump - 2)) {
 			moves.add(new Move(xInitialJump, yInitialJump, xInitialJump + 2, yInitialJump - 2));
-		} 
+		}
 		validMoves.setValidJumps(moves);
-		
+
 		int arraySize;
-		if(validMoves.getValidJumps().size() > 0) {
+		if (validMoves.getValidJumps().size() > 0) {
 			arraySize = validMoves.getValidJumps().size();
 			int rand = (int) (Math.random() * arraySize);
 			return move = validMoves.getValidJumps().get(rand);
-		}
-		else {
+		} else {
 			return null;
 		}
 	}
@@ -231,13 +191,13 @@ public class Board {
 		if (color.equalsIgnoreCase("r")) {
 			if (squares[r1][c1].getPiece().getColor().equals("r") && r3 < r1)
 				return false; // Regular red piece can only move up.
-			if (squares[r2][c2].getPiece().getColor() != "b"  && squares[r2][c2].getPiece().getColor() != "B")
+			if (squares[r2][c2].getPiece().getColor() != "b" && squares[r2][c2].getPiece().getColor() != "B")
 				return false; // There is no black piece to jump.
 			return true; // jump is legal
 		} else {
 			if (squares[r1][c1].getPiece().getColor().equals("b") && r3 > r1)
 				return false; // Regular black piece can only move up.
-			if (squares[r2][c2].getPiece().getColor() != "r" && squares[r2][c2].getPiece().getColor() != "R") 
+			if (squares[r2][c2].getPiece().getColor() != "r" && squares[r2][c2].getPiece().getColor() != "R")
 				return false; // There is no black piece to jump.
 			return true; // jump is legal
 		}
@@ -254,26 +214,22 @@ public class Board {
 
 		if (squares[r2][c2].getPiece().getColor() != null)
 			return false; // (r2,c2) already contains a piece.
-		
+
 		if (color.equals("R") || color.equals("B"))
-			return true; 
+			return true;
 
 		if (color.equals("r")) {
-			if (squares[r1][c1].getPiece().getColor().equals("r")  && r2 < r1)
+			if (squares[r1][c1].getPiece().getColor().equals("r") && r2 < r1)
 				return false; // Regular red piece can only move down.
 			return true; // The move is legal.
 		} else {
 			if (squares[r1][c1].getPiece().getColor().equals("b") && r2 > r1)
 				return false; // Regular black piece can only move up.
 			return true; // The move is legal.
-			
-			
-			
-			
-			
+
 		}
 	} // end canMove()
-	
+
 	public ValidMoves getLegalMoves(String color) {
 		// Return an array containing all the legal CheckersMoves
 		// for the specfied player on the current board. If the player
@@ -296,7 +252,7 @@ public class Board {
 			}
 		}
 		validMoves.setValidJumps(moves);
-		
+
 		moves = new ArrayList<>();
 		for (int row = 0; row < 8; row++) {
 			for (int col = 0; col < 8; col++) {
@@ -315,7 +271,6 @@ public class Board {
 		validMoves.setValidMoves(moves);
 		return validMoves;
 	}
-
 
 	@Override
 	public String toString() {

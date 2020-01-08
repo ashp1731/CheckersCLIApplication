@@ -21,8 +21,9 @@ public class Piece {
 		this.rank = rank;
 	}
 
-	public Piece() {}
-	
+	public Piece() {
+	}
+
 	public Piece(String color, String rank) {
 		this.color = color;
 		this.rank = rank;
@@ -57,7 +58,4 @@ public class Piece {
 		return true;
 	}
 
-
-	
-	
 }

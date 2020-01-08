@@ -1,11 +1,13 @@
 package CheckersCLI;
+
 // Move class : Indicates Intial & Final positions of Pawn
 public class Move {
 
 	private int initialXCoor, initialYCoor;
 	private int endingXCoor, endingYCoor;
+
 	public Move() {
-		
+
 	}
 
 	public int getInitialXCoor() {
@@ -39,7 +41,7 @@ public class Move {
 	public void setEndingYCoor(int endingYCoor) {
 		this.endingYCoor = endingYCoor;
 	}
-	
+
 	public boolean isJumpMove() {
 		return Math.abs((getEndingXCoor() - getInitialXCoor())) > 1;
 	}
@@ -81,6 +83,5 @@ public class Move {
 			return false;
 		return true;
 	}
-
 
 }
