@@ -325,9 +325,7 @@ public class Board {
 				}
 			}
 		}
-		if(!isWinner) {
-			
-		}
+		
 		return isWinner;
 		
 	}
@@ -338,4 +336,9 @@ public class Board {
 
 	}
 
+
+
 }
+	
+	
+
