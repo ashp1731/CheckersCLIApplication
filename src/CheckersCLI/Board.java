@@ -282,7 +282,9 @@ public class Board {
 				}
 			}
 		}
+		
 		return isWinner;
+		
 	}
 	
 	public boolean playerForfiet(String color) {
@@ -302,4 +304,9 @@ public class Board {
 
 	}
 
+
+
 }
+	
+	
+
