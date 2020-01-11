@@ -110,68 +110,90 @@ public class Checkers {
 		Move moves = new Move();
 		boolean isMovevalid = false;
 		do {
-			moves = currentPlayer.makeMove(gameBoard);
-			if (gameBoard.isMoveLegal(moves, currentPlayer.getColor())) {
-				gameBoard.movePiece(moves);
+			if(!gameBoard.playerForfiet(currentPlayer.getColor())) {
+				
+				moves = currentPlayer.makeMove(gameBoard);
+				if(moves != null) {
+					if (gameBoard.isMoveLegal(moves, currentPlayer.getColor())) {
+						gameBoard.movePiece(moves);
 
-				Move printMove = new Move();
-				printMove.setInitialXCoor(moves.getInitialXCoor() + 1);
-				printMove.setInitialYCoor(moves.getInitialYCoor() + 1);
+						Move printMove = new Move();
+						printMove.setInitialXCoor(moves.getInitialXCoor() + 1);
+						printMove.setInitialYCoor(moves.getInitialYCoor() + 1);
 
-				boolean jumpContinue = false;
-				if (moves.isJumpMove()) {
-					Move moveJump = createNextMoveForSamePiece(moves);
+						boolean jumpContinue = false;
+						if (moves.isJumpMove()) {
+							Move moveJump = createNextMoveForSamePiece(moves);
 
-					do {
-						if (jumpContinue) {
-							moveJump = createNextMoveForSamePiece(moveJump);
-						}
+							do {
+								if (jumpContinue) {
+									moveJump = createNextMoveForSamePiece(moveJump);
+								}
 
-						Move calcMoveJump = gameBoard.calculateNextJump(currentPlayer.getColor(), moveJump);
-						if (calcMoveJump == null) {
-							jumpContinue = false;
+								Move calcMoveJump = gameBoard.calculateNextJump(currentPlayer.getColor(), moveJump);
+								if (calcMoveJump == null) {
+									jumpContinue = false;
+								} else {
+									jumpContinue = true;
+									gameBoard.movePiece(calcMoveJump);
+									moveJump = calcMoveJump;
+								}
+							} while (jumpContinue);
+
+							if (moveJump.getEndingXCoor() == 0) {
+								printMove.setEndingXCoor(moves.getEndingXCoor() + 1);
+								printMove.setEndingYCoor(moves.getEndingYCoor() + 1);
+							} else {
+								printMove.setEndingXCoor(moveJump.getEndingXCoor() + 1);
+								printMove.setEndingYCoor(moveJump.getEndingYCoor() + 1);
+							}
 						} else {
-							jumpContinue = true;
-							gameBoard.movePiece(calcMoveJump);
-							moveJump = calcMoveJump;
+							printMove.setEndingXCoor(moves.getEndingXCoor() + 1);
+							printMove.setEndingYCoor(moves.getEndingYCoor() + 1);
 						}
-					} while (jumpContinue);
 
-					if (moveJump.getEndingXCoor() == 0) {
-						printMove.setEndingXCoor(moves.getEndingXCoor() + 1);
-						printMove.setEndingYCoor(moves.getEndingYCoor() + 1);
+						isMovevalid = false;
+						printMove(printMove);
 					} else {
-						printMove.setEndingXCoor(moveJump.getEndingXCoor() + 1);
-						printMove.setEndingYCoor(moveJump.getEndingYCoor() + 1);
-					}
-				} else {
-					printMove.setEndingXCoor(moves.getEndingXCoor() + 1);
-					printMove.setEndingYCoor(moves.getEndingYCoor() + 1);
+						System.out.println("This move is invalid - ");
+
+						  isMovevalid=true;
+					}	
 				}
-
-				isMovevalid = false;
-				printMove(printMove);
-			} else {
-				System.out.println("This move is invalid - ");
-				isMovevalid = true;
+			
 			}
-		} while (isMovevalid);
+			else {
+				switchPlayer();
+				if(gameBoard.playerForfiet(currentPlayer.getColor())) {
+				// Draw	
+					isInProgress = false;
+					
+				}
+				else {
+					// Winner
+					isInProgress = false;
+					winner = currentPlayer.getColor();
+				}
+				
+			}
 
-//		 String checkWinner;
-//		 if (currentPlayer.getColor() == playerOne.getColor()) {
-//				checkWinner = playerTwo.getColor();
-//			} else {
-//				checkWinner = playerOne.getColor();
-//			}
-//		 	 
-//		 if(gameBoard.isWinner(checkWinner){
-//			 isInProgress = false;
-//		 	 Winner = currentPlayer.getColor();
-//		 }
-//		 else {
-//			 switchPlayer();
-//		 }
-		switchPlayer();
+
+		 }while(isMovevalid);	
+		 
+		 String checkWinner;
+		 if (currentPlayer.getColor() == playerOne.getColor()) {
+				checkWinner = playerTwo.getColor();
+			} else {
+				checkWinner = playerOne.getColor();
+			}
+		 	 
+		 if(gameBoard.getWinner(checkWinner)){
+			 isInProgress = false;
+		 	 winner = currentPlayer.getColor();
+		 }
+		 else {
+			 switchPlayer();
+		 }	
 	}
 
 	private void printMove(Move move) {
@@ -215,8 +237,19 @@ public class Checkers {
 	public void displayEndOfGameMessage() {
 		String playerWin;
 		if (!isInProgress) {
-			System.out.println("Congratulations!! "
-					+ (playerWin = winner.equalsIgnoreCase("r") ? "Player One" : "Player Two") + " is winner!!!");
+			
+			if(winner.equalsIgnoreCase("r")) {
+				// Player 1 is Winner
+				System.out.println("Congratulations!! Player One is winner!!!");
+			}
+			else if(winner.equalsIgnoreCase("b")) {
+				// Player 2 is Winner
+				System.out.println("Congratulations!! Player Two is winner!!!");
+			}
+			else {
+				// Draw
+				System.out.println("It's a Draw!! Well played.");
+			}				
 		}
 	}
 

@@ -272,6 +272,30 @@ public class Board {
 		return validMoves;
 	}
 
+	public boolean getWinner(String color) {
+		boolean isWinner = true;
+		for (int row = 0; row < 8; row++) {
+			for (int col = 0; col < 8; col++) {
+				if (color.equalsIgnoreCase(squares[row][col].getPiece().getColor())) {
+					isWinner = false;
+					break;
+				}
+			}
+		}
+		return isWinner;
+	}
+	
+	public boolean playerForfiet(String color) {
+		ValidMoves validMoves = getLegalMoves(color);
+		if(validMoves == null) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+
 	@Override
 	public String toString() {
 		return "Board [squares=" + Arrays.toString(squares) + "]";
