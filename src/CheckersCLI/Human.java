@@ -73,7 +73,13 @@ public class Human extends Player {
 		do {
 			if (input.hasNextInt()) {
 				readInput = input.nextInt();
-				inputWasNotValid = false;
+				if(readInput < 1 || readInput > 8){
+					inputWasNotValid = true;
+					System.out.println("Number should be between 1 & 8");
+				}else {
+					inputWasNotValid = false;
+				}
+				
 			} else {
 				inputWasNotValid = true;
 				input.next();
