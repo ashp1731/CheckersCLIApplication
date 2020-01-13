@@ -289,12 +289,7 @@ public class Board {
 	
 	public boolean playerForfiet(String color) {
 		ValidMoves validMoves = getLegalMoves(color);
-		if(validMoves.getValidJumps().size() == 0 && validMoves.getValidMoves().size() == 0) {
-			return true;
-		}
-		else {
-			return false;
-		}
+			return validMoves.getValidJumps().size() == 0 && validMoves.getValidMoves().size() == 0;
 	}
 
 
